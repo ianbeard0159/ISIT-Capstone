@@ -20,4 +20,8 @@ public static class StaticFunctions
         // Primary Movement
         return Vector3.Lerp(secondary_start_A_B, secondary_A_B_end, percentage);
     }
+
+    public static Vector3 GetReflection(Vector3 in_origin, Vector3 in_point) {
+        return in_origin + ((in_origin - in_point).normalized * Vector3.Distance(in_origin, in_point));
+    }
 }
