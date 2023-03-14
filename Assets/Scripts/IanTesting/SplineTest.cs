@@ -40,7 +40,7 @@ public class SplineTest : MonoBehaviour
         if (!init) Init();
 
         if (flag_pathStarted) interpolateAmount = (Time.time - startTime) / finishTime;
-        if (flag_pathStarted && interpolateAmount < 1) {
+        if (flag_pathStarted && interpolateAmount < 1 && interpolateAmount > 0) {
 
             control_A_Position = (control_A_inverse) ? StaticFunctions.GetReflection(startPoint, control_A.position): control_A.position;
             Vector3 targetPos = StaticFunctions.GetSplinePosition(startPoint, point_end.position, control_A_Position, control_B.position, interpolateAmount);
