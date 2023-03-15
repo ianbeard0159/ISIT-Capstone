@@ -15,7 +15,9 @@ public class SplineTest : MonoBehaviour
     private float startTime;
     private bool flag_pathStarted = false;
     private Rigidbody moverBody;
-    private Vector3 lastVelocity;
+    private Vector3 lastVelocity = Vector3.zero;
+    private Vector3 secondLastVelocity = Vector3.zero;
+    private Vector3 thirdLast = Vector3.zero;
     private StartPoint startPointInstance;
     private EndPoint endPointInstance;
     private bool init = false;
@@ -35,7 +37,7 @@ public class SplineTest : MonoBehaviour
     void Awake() {
         Init();
     }
-    void Update()
+    void FixedUpdate()
     {
         if (!init) Init();
 
@@ -47,9 +49,12 @@ public class SplineTest : MonoBehaviour
             
             Vector3 currentPos = mover.position;
             float moveDistance = Vector3.Distance(currentPos, targetPos);
+            thirdLast = secondLastVelocity;
+            secondLastVelocity = lastVelocity;
             lastVelocity = (targetPos - currentPos).normalized * (moveDistance / Time.deltaTime);
             
             mover.position = targetPos;
+            moverBody.velocity = Vector3.zero;
         }
     }
     void OnDestroy() {
@@ -59,20 +64,23 @@ public class SplineTest : MonoBehaviour
     public void StartPath(Transform in_mover) {
         if (flag_pathStarted) return;
 
-        Debug.Log("Start Path");
         mover = in_mover;
         moverBody = mover.GetComponent<Rigidbody>();
+        moverBody.velocity = Vector3.zero;
         startPoint = mover.position;
         flag_pathStarted = true;
         startTime = Time.time;
     }
     public void EndPath(Transform in_mover, bool in_lastEndPoint) {
         if (in_mover == mover) {
-            moverBody.velocity = (lastVelocity);
-            mover.GetComponent<Mover>().flag_engaged = false;
             flag_pathStarted = false;
+            mover.GetComponent<Mover>().flag_engaged = false;
+            if (in_lastEndPoint) moverBody.velocity = lastVelocity;
             mover = null;
             moverBody = null;
+            thirdLast = Vector3.zero;
+            secondLastVelocity = Vector3.zero;
+            lastVelocity = Vector3.zero;
         }
     }
 
