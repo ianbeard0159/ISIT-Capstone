@@ -6,7 +6,9 @@ public class SplineWaypoint : MonoBehaviour
 {
     private Transform control;
     public Vector3 controlPoint {get; set;} = Vector3.zero;
-    private Vector3 controlInverse {get; set;} = Vector3.zero;
+    public Vector3 controlInverse {get; set;} = Vector3.zero;
+    public Vector3 centerPoint {get; set;} = Vector3.zero;
+    public float pathTime = 1.0f;
     private bool flag_isInitialized = false;
     // Start is called before the first frame update
     void Init() {
@@ -32,5 +34,6 @@ public class SplineWaypoint : MonoBehaviour
         if (!flag_isInitialized) Init();
         controlPoint = control.position;
         controlInverse = StaticFunctions.GetReflection(transform.position, controlPoint);
+        centerPoint = transform.position;
     }
 }
