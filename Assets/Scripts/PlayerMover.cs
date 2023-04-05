@@ -5,16 +5,33 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    private CharacterController characterController;
-    private bool _inFeature; //bool for whether player is in feature or not
-    public Rigidbody rb;
+    CharacterController characterController;
+    Rigidbody playerRgbody;
+
+    //Flags to track player postion
+    private bool _inFeature;
+    private bool _onGround;
+    private bool _closeToGournd;
+
+    //Get board used for movement
+    private GameObject board;
+
+    //Linear Movement
+    [SerializeField]
+    float boardSpeed;
+
+    //Rotational Movement
+    [SerializeField]
+    float boardRotSpeed = 0.01f;
+    float timeCount = 0.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
+        playerRgbody = GetComponent<Rigidbody>();
+        board = GameObject.FindGameObjectWithTag("Board");
     }
 
     // Update is called once per frame
@@ -24,33 +41,33 @@ public class PlayerMover : MonoBehaviour
         //currently not using camera rotation.
         Vector3 cameraDir = Camera.main.transform.forward;
         Quaternion cameraRot = Camera.main.transform.rotation;
+        //take board direction
+        Vector3 boardDir = board.transform.forward;
 
         //player rotation needs to ignore vertical rotation
         //take camerDir as the direction to for the rotation
-        var forRotation = cameraDir;
+        var newRotation = cameraDir;
         //change the y axis point to zero
-        forRotation.y = 0f;
+        newRotation.y = 0f;
         //renormalize the vector
-        forRotation.Normalize();
+        newRotation.Normalize();
         //make rot quaternion using the new look forRotation, using Vector3.up for the world up direction
-        var rot = Quaternion.LookRotation(forRotation, Vector3.up);
+        var boardRotation = Quaternion.LookRotation(newRotation, Vector3.up);
 
         if (_inFeature)
         {
 
         }
-        else
+        else if(!_onGround)
         {
-            //Uses the rigid body to move the player
-            //rb.AddRelativeForce(cameraDir * 2);
-
-            //Just moved the players position in the world by where the Camera is facing,
+            //adding a constant force based on where the board is facing (not player camera)
             //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
             //so that it is positioned 1 unit in front of the player.
-            transform.position += cameraDir * Time.deltaTime;
+            playerRgbody.AddForce(boardDir * boardSpeed);
 
             //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, 1 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, boardRotSpeed * timeCount);
+            timeCount = timeCount + Time.deltaTime;
         }
     }
 }

@@ -414,7 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bede02b16d2973a48a7b31e4a5e8e75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  boardSpeed: 1
+  boardRotSpeed: 0.1
 --- !u!136 &1128959855
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -893,8 +894,8 @@ GameObject:
   - component: {fileID: 1679245845}
   - component: {fileID: 1679245844}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Board
+  m_TagString: Board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
