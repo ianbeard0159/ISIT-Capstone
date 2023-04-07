@@ -65,9 +65,14 @@ public class PlayerMover : MonoBehaviour
             //so that it is positioned 1 unit in front of the player.
             playerRgbody.AddForce(boardDir * boardSpeed);
 
+            
+
             //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
             transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, boardRotSpeed * timeCount);
             timeCount = timeCount + Time.deltaTime;
+
+            //old code, use if things get hard
+            //transform.position += cameraDir * Time.deltaTime;
         }
     }
 }
