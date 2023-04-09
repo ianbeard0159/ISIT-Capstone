@@ -4,13 +4,20 @@ using UnityEngine;
 
 namespace Spline 
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IMover
     {
-        public bool flag_engaged = false;
+        public bool flag_engaged {get; set;} = false;
         private Vector3 startPosition;
         private float startTime;
         private Rigidbody rigidBody;
         [SerializeField] private float resetTime = 10;
+
+        public Transform GetTransform() {
+            return this.transform;
+        }
+        public Rigidbody GetRigidbody() {
+            return this.rigidBody;
+        }
 
         void Awake() {
             startPosition = transform.position;

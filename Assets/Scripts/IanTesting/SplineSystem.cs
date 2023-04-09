@@ -53,7 +53,7 @@ namespace Spline
                 if (entry.nextWaypoint == null) {
                     if (entry.startTime == -1) {
                         entry.startTime = Time.time;
-                        entry.entryPosition = entry.owner.transform.position;
+                        entry.entryPosition = entry.ownerTR.position;
                     }
                     entry.pathPercent = (Time.time - entry.startTime) / startPoint.pathTime;
                     if (entry.pathPercent >= 1.0f) {
@@ -61,14 +61,8 @@ namespace Spline
                         entry.nextWaypoint = waypoints[0];
                     }
                     else {
-                        Vector3 targetPos = StaticFunctions.GetSplinePosition(entry.entryPosition, startPoint.transform.position, entryControl.position, entryControl.position, entry.pathPercent);
-                        
-                        float moveDistance = Vector3.Distance(entry.owner.transform.position, targetPos);
-                        Vector3 velocity = (targetPos - entry.owner.transform.position).normalized * (moveDistance / Time.deltaTime);
-                        entry.owner.transform.position = targetPos;
-                        entry.owner.transform.rotation = Quaternion.LookRotation(velocity.normalized);
-                        entry.ownerRB.velocity = Vector3.zero;
-                        entry.ownerRB.angularVelocity = Vector3.zero;
+                        // Vector3 targetPos = StaticFunctions.GetSplinePosition(entry.entryPosition, startPoint.transform.position, entryControl.position, entryControl.position, entry.pathPercent);
+                        entry.SetPosition(Time.time, entry.entryPosition, entryControl.position, startPoint.transform.position, entryControl.position);
                     }
                     continue;
                 }
@@ -82,14 +76,8 @@ namespace Spline
                         entry.nextWaypoint = waypoints[1];
                     }
                     else {
-                        Vector3 targetPos =  StaticFunctions.GetSplinePosition(startPoint.transform.position, entry.nextWaypoint.centerPoint, entry.nextWaypoint.controlInverse, entry.nextWaypoint.controlInverse, entry.pathPercent);
-                        
-                        float moveDistance = Vector3.Distance(entry.owner.transform.position, targetPos);
-                        Vector3 velocity = (targetPos - entry.owner.transform.position).normalized * (moveDistance / Time.deltaTime);
-                        entry.owner.transform.position = targetPos;
-                        entry.owner.transform.rotation = Quaternion.LookRotation(velocity.normalized);
-                        entry.ownerRB.velocity = Vector3.zero;
-                        entry.ownerRB.angularVelocity = Vector3.zero;
+                        //Vector3 targetPos =  StaticFunctions.GetSplinePosition(startPoint.transform.position, entry.nextWaypoint.centerPoint, entry.nextWaypoint.controlInverse, entry.nextWaypoint.controlInverse, entry.pathPercent);
+                        entry.SetPosition(Time.time, startPoint.transform.position, entry.nextWaypoint.controlInverse, entry.nextWaypoint.centerPoint, entry.nextWaypoint.controlInverse);
                     }
                     continue;
                 }
@@ -152,7 +140,7 @@ namespace Spline
             }
         }
 
-        private void Event_EnterSystem(Mover in_mover) {
+        private void Event_EnterSystem(IMover in_mover) {
             in_mover.flag_engaged = true;
             SplineMoverEntry entry = new SplineMoverEntry(in_mover);
             entry.flag_onPath = true;

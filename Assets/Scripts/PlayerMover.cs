@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : MonoBehaviour, IMover
 {
     CharacterController characterController;
     Rigidbody playerRgbody;
@@ -25,6 +25,14 @@ public class PlayerMover : MonoBehaviour
     float boardRotSpeed = 0.01f;
     float timeCount = 0.0f;
 
+    // Mover Interface
+    public bool flag_engaged {get; set;}
+    public Transform GetTransform() {
+        return this.transform;
+    }
+    public Rigidbody GetRigidbody() {
+        return this.playerRgbody;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +62,7 @@ public class PlayerMover : MonoBehaviour
         //make rot quaternion using the new look forRotation, using Vector3.up for the world up direction
         var boardRotation = Quaternion.LookRotation(newRotation, Vector3.up);
 
-        if (_inFeature)
+        if (_inFeature || flag_engaged)
         {
 
         }
