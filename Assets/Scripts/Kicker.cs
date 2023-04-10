@@ -23,8 +23,9 @@ public class Kicker : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider in_collider)
     {
+        PlayerMover mover = in_collider.gameObject.GetComponent<PlayerMover>();
         Vector3 boardDir = board.transform.forward;
         playerRgbody.AddForce(boardDir * 20, ForceMode.Impulse);
     }

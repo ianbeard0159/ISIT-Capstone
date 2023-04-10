@@ -15,6 +15,8 @@ public class PlayerMover : MonoBehaviour
 
     //Get board used for movement
     private GameObject board;
+    private GameObject ground;
+    private GameObject prox;
 
     //Linear Movement
     [SerializeField]
@@ -32,6 +34,8 @@ public class PlayerMover : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerRgbody = GetComponent<Rigidbody>();
         board = GameObject.FindGameObjectWithTag("Board");
+        ground = GameObject.FindGameObjectWithTag("GroundTrigger");
+        prox = GameObject.FindGameObjectWithTag("ProxTrigger");
     }
 
     // Update is called once per frame
@@ -58,7 +62,7 @@ public class PlayerMover : MonoBehaviour
         {
 
         }
-        else if(!_onGround)
+        else if(_onGround)
         {
             //adding a constant force based on where the board is facing (not player camera)
             //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
