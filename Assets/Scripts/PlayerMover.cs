@@ -10,11 +10,14 @@ public class PlayerMover : MonoBehaviour, IMover
 
     //Flags to track player postion
     private bool _inFeature;
-    private bool _onGround;
-    private bool _closeToGournd;
+    public bool _onGround = true;
+    public bool _closeToGround;
 
-    //Get board used for movement
+    //Get objects, board used for movement
+    //Board for movement, ground and prox for context
     private GameObject board;
+    private GameObject ground;
+    private GameObject prox;
 
     //Linear Movement
     [SerializeField]
@@ -22,8 +25,11 @@ public class PlayerMover : MonoBehaviour, IMover
 
     //Rotational Movement
     [SerializeField]
-    float boardRotSpeed = 0.01f;
+    public float boardRotSpeed = 0.01f;
     float timeCount = 0.0f;
+
+    private Animator animator;
+
 
     // Mover Interface
     public bool flag_engaged {get; set;}
@@ -40,6 +46,7 @@ public class PlayerMover : MonoBehaviour, IMover
         characterController = GetComponent<CharacterController>();
         playerRgbody = GetComponent<Rigidbody>();
         board = GameObject.FindGameObjectWithTag("Board");
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -68,12 +75,18 @@ public class PlayerMover : MonoBehaviour, IMover
         }
         else if(!_onGround)
         {
+            transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardRotSpeed / 10) * timeCount);
+            timeCount = timeCount + Time.deltaTime;
+        }
+        else
+        {
+            
             //adding a constant force based on where the board is facing (not player camera)
             //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
             //so that it is positioned 1 unit in front of the player.
             playerRgbody.AddForce(boardDir * boardSpeed);
 
-            
+
 
             //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
             transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, boardRotSpeed * timeCount);
