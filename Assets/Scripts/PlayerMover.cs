@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour, IMover
 {
+    private bool debug = false;
+
     CharacterController characterController;
-    Rigidbody playerRgbody;
+    public Rigidbody playerRgbody;
 
     //Flags to track player postion
     private bool _inFeature;
@@ -15,7 +17,7 @@ public class PlayerMover : MonoBehaviour, IMover
 
     //Get objects, board used for movement
     //Board for movement, ground and prox for context
-    private GameObject board;
+    public GameObject board;
     private GameObject ground;
     private GameObject prox;
 
@@ -29,6 +31,11 @@ public class PlayerMover : MonoBehaviour, IMover
     float timeCount = 0.0f;
 
     private Animator animator;
+
+    //Score
+    public int actScore;
+    public int potScore;
+    public int flagScore;
 
 
     // Mover Interface
@@ -69,31 +76,79 @@ public class PlayerMover : MonoBehaviour, IMover
         //make rot quaternion using the new look forRotation, using Vector3.up for the world up direction
         var boardRotation = Quaternion.LookRotation(newRotation, Vector3.up);
 
-        if (_inFeature || flag_engaged)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-
+            Toggle(debug);
         }
-        else if(!_onGround)
+
+        if (debug)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardRotSpeed / 10) * timeCount);
-            timeCount = timeCount + Time.deltaTime;
+            var dir = transform.position;
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                dir.x += 1;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                dir.x -= 1;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                dir.z += 1;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                dir.z -= 1;
+            }
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                dir.y += 1;
+            }
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                dir.y -= 1;
+            }
+            transform.position = dir;
         }
         else
         {
-            
-            //adding a constant force based on where the board is facing (not player camera)
-            //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
-            //so that it is positioned 1 unit in front of the player.
-            playerRgbody.AddForce(boardDir * boardSpeed);
+            if (_inFeature || flag_engaged)
+            {
+
+            }
+            else if (!_onGround)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardRotSpeed / 10) * timeCount);
+                timeCount = timeCount + Time.deltaTime;
+            }
+            else
+            {
+                //adding a constant force based on where the board is facing (not player camera)
+                //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
+                //so that it is positioned 1 unit in front of the player.
+                playerRgbody.AddForce(boardDir * boardSpeed);
 
 
 
-            //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
-            transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, boardRotSpeed * timeCount);
-            timeCount = timeCount + Time.deltaTime;
+                //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
+                transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, boardRotSpeed * timeCount);
+                timeCount = timeCount + Time.deltaTime;
 
-            //old code, use if things get hard
-            //transform.position += cameraDir * Time.deltaTime;
+                //old code, use if things get hard
+                //transform.position += cameraDir * Time.deltaTime;
+            }
+        }
+    }
+
+    void Toggle(bool toggle)
+    {
+        if (toggle)
+        {
+            toggle = false;
+        }
+        else
+        {
+            toggle = true;
         }
     }
 }
