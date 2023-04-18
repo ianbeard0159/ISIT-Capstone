@@ -19,6 +19,7 @@ namespace Spline
         private Transform startPositionBox;
         private Transform entryControl;
         private Vector3 entryInverse;
+        [SerializeField] private float distanceModifier = 1.5f;
 
         void Init() {
             engagedMovers = new List<SplineMoverEntry>();
@@ -64,8 +65,7 @@ namespace Spline
                     }
                     // Velocity = distance/time Velocity * time = d
                     // time = distance / velocity
-                    entry.pathPercent = (Time.time - entry.startTime) / ((Vector3.Distance(entry.entryPosition, startPoint.transform.position) * 1.5f) / entry.initialVelocity);
-                    Debug.Log($"{entry.pathPercent} = ({Time.time} - {entry.startTime}) / ({Vector3.Distance(entry.entryPosition, startPoint.transform.position)} / {entry.initialVelocity})");
+                    entry.pathPercent = (Time.time - entry.startTime) / ((Vector3.Distance(entry.entryPosition, startPoint.transform.position) * distanceModifier) / entry.initialVelocity);
                     if (entry.pathPercent >= 1.0f) {
                         entry.startTime = Time.time;
                         entry.nextWaypoint = waypoints[0];
@@ -80,7 +80,6 @@ namespace Spline
                 // Go from start point to first waypoint
                 if (entry.nextWaypoint == waypoints[0]) {
                     entry.pathPercent = (Time.time - entry.startTime) / (entry.nextWaypoint.pathDistance / entry.initialVelocity);
-                    Debug.Log($"{entry.pathPercent} = ({Time.time} - {entry.startTime}) / ({entry.nextWaypoint.pathDistance} / {entry.initialVelocity})");
                     if (entry.pathPercent >= 1.0f) {
                         entry.startTime = Time.time;
                         entry.currentWaypoint = waypoints[0];
@@ -95,7 +94,6 @@ namespace Spline
 
                 // Check if mover is at the end of it's current path
                 entry.pathPercent = (Time.time - entry.startTime) / (entry.nextWaypoint.pathDistance / entry.initialVelocity);
-                Debug.Log($"{entry.pathPercent} = ({Time.time} - {entry.startTime}) / ({entry.nextWaypoint.pathDistance} / {entry.initialVelocity})");
                 if (entry.pathPercent >= 1.0f) {
                     int waypointIndex = waypoints.IndexOf(entry.nextWaypoint);
                     // Check if mover has finished following all paths on the spline curve
@@ -138,7 +136,6 @@ namespace Spline
             for (int i = 0; i < numberOfPoints; i++) {
                     float precent = i / numberOfPoints;
                     Vector3 drawPoint = StaticFunctions.GetSplinePosition(startPoint.transform.position, waypoints[0].centerPoint, entryInverse, waypoints[0].controlInverse, precent);
-                    Debug.Log(drawPoint);
                     if (i != 0) {
                         distanceSum += Vector3.Distance(drawPoint, lastPoint);
                     }
@@ -147,7 +144,7 @@ namespace Spline
                     }
                     lastPoint = drawPoint;
             }
-            waypoints[0].pathDistance = distanceSum * 1.5f;
+            waypoints[0].pathDistance = distanceSum * distanceModifier;
 
             // Draw path between each waypoint in the system
             for (int i = 0; i < waypoints.Count - 1; i++) {
@@ -165,7 +162,7 @@ namespace Spline
                     }
                     lastPoint = drawPoint;
                 }
-                waypoints[i+1].pathDistance = distanceSum * 1.5f;
+                waypoints[i+1].pathDistance = distanceSum * distanceModifier;
             }
         }
 
