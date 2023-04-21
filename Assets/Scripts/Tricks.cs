@@ -13,10 +13,11 @@ public class Tricks : MonoBehaviour
 
     bool animationFinished;
 
-    KeywordRecognizer keywordRecognizer;
-    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+    public string[] keywords = new string[] { "-180", "down", "left", "right" };
+    public ConfidenceLevel confidence = ConfidenceLevel.Medium;
 
-
+    protected PhraseRecognizer recognizer;
+    protected string word = "right";
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,19 @@ public class Tricks : MonoBehaviour
         {
             // action to be performed when this keyword is spoken
         });
+
+        if (keywords != null)
+        {
+            recognizer = new KeywordRecognizer(keywords, confidence);
+            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+            recognizer.Start();
+            Debug.Log(recognizer.IsRunning);
+        }
+
+        foreach (var device in Microphone.devices)
+        {
+            Debug.Log("Name: " + device);
+        }
     }
 
     // Update is called once per frame
