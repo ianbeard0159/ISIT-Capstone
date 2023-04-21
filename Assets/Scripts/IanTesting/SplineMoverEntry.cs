@@ -16,6 +16,7 @@ namespace Spline
         public Rigidbody ownerRB;
         public Vector3 entryPosition;
         public bool flag_onPath = false;
+        public float initialVelocity;
 
         public SplineMoverEntry(IMover in_owner) {
             owner = in_owner;
@@ -29,7 +30,7 @@ namespace Spline
             velocity = (targetPos - ownerTR.position).normalized * (moveDistance / Time.deltaTime);
 
             ownerTR.position = targetPos;
-            ownerTR.rotation = Quaternion.LookRotation(velocity.normalized);
+            ownerTR.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
             ownerRB.velocity = Vector3.zero;
             ownerRB.angularVelocity = Vector3.zero;
         }
@@ -40,7 +41,7 @@ namespace Spline
             velocity = (targetPos - ownerTR.position).normalized * (moveDistance / Time.deltaTime);
 
             ownerTR.position = targetPos;
-            ownerTR.rotation = Quaternion.LookRotation(velocity.normalized);
+            ownerTR.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
             ownerRB.velocity = Vector3.zero;
             ownerRB.angularVelocity = Vector3.zero;
         }

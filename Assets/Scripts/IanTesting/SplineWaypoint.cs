@@ -11,15 +11,19 @@ namespace Spline
         public Vector3 controlInverse {get; set;} = Vector3.zero;
         public Vector3 centerPoint {get; set;} = Vector3.zero;
         public float pathTime = 1.0f;
-        private bool flag_isInitialized = false;
+        public float pathDistance {get; set;}
+        public bool flag_isInitialized {get; set;} = false;
         // Start is called before the first frame update
-        void Init() {
+        public void Init() {
             control = transform.Find("Control").transform;
             flag_isInitialized = true;
         }
         void Awake()
         {
             control = transform.Find("Control").transform;
+        }
+        void Start() {
+            SetControlPositions(transform.position);
         }
 
         // Update is called once per frame
