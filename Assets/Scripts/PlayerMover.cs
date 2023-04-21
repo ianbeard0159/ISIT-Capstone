@@ -37,6 +37,8 @@ public class PlayerMover : MonoBehaviour, IMover
     public int potScore;
     public int flagScore;
 
+    public bool inTrick;
+
 
     // Mover Interface
     public bool flag_engaged {get; set;}
