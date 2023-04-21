@@ -28,15 +28,15 @@ public class Tricks : MonoBehaviour
         animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //Create keywords for keyword recognizer
-        keywords.Add("activate", () =>
-        {
-            // action to be performed when this keyword is spoken
-        });
+        //keywords.Add("activate", () =>
+        //{
+        //    // action to be performed when this keyword is spoken
+        //});
 
         if (keywords != null)
         {
             recognizer = new KeywordRecognizer(keywords, confidence);
-            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+           // recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
             recognizer.Start();
             Debug.Log(recognizer.IsRunning);
         }
