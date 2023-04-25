@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class Kicker : MonoBehaviour
 {
-    private GameObject player;
-    private GameObject board;
-    private Vector3 playerSpeed;
-    Rigidbody playerRgbody;
+    [SerializeField]
+    float LiftSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerRgbody = player.GetComponent<Rigidbody>();
-        board = GameObject.FindGameObjectWithTag("Board");
+
     }
 
     // Update is called once per frame
@@ -23,9 +19,10 @@ public class Kicker : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider in_collider)
     {
-        Vector3 boardDir = board.transform.forward;
-        playerRgbody.AddForce(boardDir * 20, ForceMode.Impulse);
+        Rigidbody mover = in_collider.gameObject.GetComponent<Rigidbody>();
+
+        mover.AddForce(in_collider.transform.forward * LiftSpeed, ForceMode.Impulse);
     }
 }
