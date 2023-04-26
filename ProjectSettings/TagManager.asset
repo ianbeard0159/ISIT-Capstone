@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Board
+  - Prox
+  - Ground
   layers:
   - Default
   - TransparentFX
