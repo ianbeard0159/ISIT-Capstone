@@ -22,4 +22,35 @@ public class MenuManager : MonoBehaviour
 
         currentPanel.Show();
     }
+
+    private void Update()
+    {
+        
+    }
+
+    public void GoToPrevious()
+    {
+        if (panelHistory.Count == 0)
+        {
+            return;
+        }
+
+        int lastIndex = panelHistory.Count - 1;
+        SetCurrent(panelHistory[lastIndex]);
+        panelHistory.RemoveAt(lastIndex);
+    }
+
+    public void SetCurrentWithHistory(Panel newPanel)
+    {
+        panelHistory.Add(currentPanel);
+        SetCurrent(newPanel);
+    }
+
+    private void SetCurrent(Panel newPanel)
+    {
+        currentPanel.Hide();
+
+        currentPanel = newPanel;
+        currentPanel.Show();
+    }
 }
