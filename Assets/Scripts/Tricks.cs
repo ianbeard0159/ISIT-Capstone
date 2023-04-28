@@ -131,7 +131,7 @@ public class Tricks : MonoBehaviour
                 if (oneEightyAction.triggered || word == "one eighty")
                 {
                     player.inTrick = true;
-                    animator.Play("180", -1, 0);
+                    animator.Play("180");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -145,7 +145,7 @@ public class Tricks : MonoBehaviour
                 if (backflipAction.triggered || word == "Backflip")
                 {
                     player.inTrick = true;
-                    animator.Play("Backflip", -1, 0);
+                    animator.Play("Backflip");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -159,7 +159,7 @@ public class Tricks : MonoBehaviour
                 if (backslideAction.triggered || word == "Backslide") 
                 {
                     player.inTrick = true;
-                    animator.Play("Backslide", -1, 0);
+                    animator.Play("Backslide");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -173,7 +173,7 @@ public class Tricks : MonoBehaviour
                 if (frontflipAction.triggered || word == "Frontflip")
                 {
                     player.inTrick = true;
-                    animator.Play("Frontflip", -1, 0);
+                    animator.Play("Frontflip");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -187,7 +187,7 @@ public class Tricks : MonoBehaviour
                 if (frontslideAction.triggered || word == "Frontslip")
                 {
                     player.inTrick = true;
-                    animator.Play("Frontslip", -1, 0);
+                    animator.Play("Frontslip");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -201,7 +201,7 @@ public class Tricks : MonoBehaviour
                 if (sevenTwentyAction.triggered || word == "seven twenty")
                 {
                     player.inTrick = true;
-                    animator.Play("720", -1, 0);
+                    animator.Play("720");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
@@ -215,7 +215,7 @@ public class Tricks : MonoBehaviour
                 if (threeSixtyAction.triggered || word == "three sixty")
                 {
                     player.inTrick = true;
-                    animator.Play("360", -1, 0);
+                    animator.Play("360");
                     if (word == lastTrick)
                     {
                         player.potScore += 500;
