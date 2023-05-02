@@ -3,105 +3,228 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class Tricks : MonoBehaviour
 {
+    //Animation Controller
     private Animator animator;
-    private PlayerMover player;
     AnimatorStateInfo animStateInfo;
     public float NTime;
-
     bool animationFinished;
 
-    public string[] keywords = new string[] { "-180", "down", "left", "right" };
+    //Player mover script
+    private PlayerMover player;
+    
+    //Voice comands
+    //keywords are the phrases the game will be looking for
+    public string[] keywords = new string[] { "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
-
     protected PhraseRecognizer recognizer;
-    protected string word = "right";
+    public string results; //results might be extra, consider deleting
+    protected string word = ""; //what the play has said
+
+    //Inputs for the tricks, button triggers are made in the unity inspector
+    public InputAction negativeOneEightyAction;
+    public InputAction oneEightyAction;
+    public InputAction threeSixtyAction;
+    public InputAction sevenTwentyAction;    
+    public InputAction backflipAction;
+    public InputAction backslideAction;
+    public InputAction frontflipAction;
+    public InputAction frontslideAction;
+
+    //When this script is enabled, all the actions are also enabled
+    private void OnEnable()
+    {
+        negativeOneEightyAction.Enable();
+        oneEightyAction.Enable();
+        threeSixtyAction.Enable();
+        sevenTwentyAction.Enable();
+        backflipAction.Enable();
+        backslideAction.Enable();
+        frontflipAction.Enable();
+        frontslideAction.Enable();
+    }
+
+    //When this script is disabled, all actions are also disabled
+    private void OnDisable()
+    {
+        negativeOneEightyAction.Disable();
+        oneEightyAction.Disable();
+        threeSixtyAction.Disable();
+        sevenTwentyAction.Disable();
+        backflipAction.Disable();
+        backslideAction.Disable();
+        frontflipAction.Disable();
+        frontslideAction.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
         animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
 
+        //checks animation states, used for seeing if animation is finish
         animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        //Create keywords for keyword recognizer
-        //keywords.Add("activate", () =>
-        //{
-        //    // action to be performed when this keyword is spoken
-        //});
-
+        //fills the voice conrol recognizer with the keyword list
         if (keywords != null)
         {
             recognizer = new KeywordRecognizer(keywords, confidence);
-           // recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
             recognizer.Start();
             Debug.Log(recognizer.IsRunning);
         }
 
+        //logs all the avalibe microphones
         foreach (var device in Microphone.devices)
         {
             Debug.Log("Name: " + device);
         }
     }
 
+    private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        word = args.text;
+        results = "You said: <b>" + word + "</b>";
+    }
+
     // Update is called once per frame
     void Update()
     {
-        NTime = animStateInfo.normalizedTime;
+        //logs the last trick used
+        var lastTrick = "";
+        NTime = animStateInfo.normalizedTime; //grabs the time the animation plays, should max out at 1 (second)
+        if (animationFinished)
+        {
+            //if animation is finished, player should not be considered in a trick
+            player.inTrick = false;
+        }
+        //if the player is not on the ground, or in a trick,
+        //they can call out a trick name or 'gamepad' input
         if (!player._onGround)
         {
             if (!player.inTrick)
-            {
-                if (Input.GetKeyDown(KeyCode.Q))
+            { 
+                if (negativeOneEightyAction.triggered || word == "negative one eighty")
                 {
-                    animator.Play("-180", -1, 0);
-                    player.potScore += 1000;
+                    //once in a trick, set intrick to true, play the animation
                     player.inTrick = true;
+                    animator.Play("-180");
+                    //animator.SetBool();
+                    //animator.SetTrigger();
+                    //in this trick matches the last trick, player recieves reduced points
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    //set this trick as the last trick
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.W))
+                if (oneEightyAction.triggered || word == "one eighty")
                 {
-                    animator.Play("180", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("180");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.E))
+                if (backflipAction.triggered || word == "Backflip")
                 {
-                    animator.Play("Backflip", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("Backflip");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.R))
+                if (backslideAction.triggered || word == "Backslide") 
                 {
-                    animator.Play("Backslide", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("Backslide");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.T))
+                if (frontflipAction.triggered || word == "Frontflip")
                 {
-                    animator.Play("Frontflip", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("Frontflip");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.Y))
+                if (frontslideAction.triggered || word == "Frontslip")
                 {
-                    animator.Play("Frontslip", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("Frontslip");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.U))
+                if (sevenTwentyAction.triggered || word == "seven twenty")
                 {
-                    animator.Play("720", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("720");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
-                if (Input.GetKeyDown(KeyCode.I))
+                if (threeSixtyAction.triggered || word == "three sixty")
                 {
-                    animator.Play("360", -1, 0);
-                    player.potScore += 1000;
                     player.inTrick = true;
+                    animator.Play("360");
+                    if (word == lastTrick)
+                    {
+                        player.potScore += 500;
+                    }
+                    else
+                    {
+                        player.potScore += 1000;
+                    }
+                    lastTrick = word;
                 }
             }
             else
@@ -112,6 +235,8 @@ public class Tricks : MonoBehaviour
                     //visual animation
                     player.playerRgbody.AddForce(player.board.transform.forward * -20, ForceMode.Impulse);
                     player.potScore = 0;
+                    player.inTrick = false;
+                    lastTrick = "";
                 }
             }
 
@@ -121,12 +246,23 @@ public class Tricks : MonoBehaviour
                 player.actScore += player.potScore;
                 player.potScore = 0;
                 player.inTrick = false;
+                lastTrick = "";
             }
-            if (NTime > 1.0f)
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
                 animationFinished = true;
                 player.inTrick = false;
             }
+        }
+    }
+
+    //shuts down voice recognition when the game closes
+    private void OnApplicationQuit()
+    {
+        if (recognizer != null && recognizer.IsRunning)
+        {
+            recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
+            recognizer.Stop();
         }
     }
 }
