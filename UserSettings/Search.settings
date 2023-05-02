@@ -10,6 +10,9 @@ scopes = {
 	"last_search.2138236A" = "xr interaction manager"
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
+	"last_search.DA949528" = "grass"
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "menu"
 }
 providers = {
 	adb = {
@@ -56,6 +59,8 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"g"
+	"standa"
 	"xr interaction manager"
 ]
 searchItemFavorites = [
