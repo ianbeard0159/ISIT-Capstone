@@ -26,7 +26,7 @@ namespace Spline
         }
 
         void Update() {
-            if (Time.time > startTime + resetTime) {
+            if (Time.time > startTime + resetTime && !flag_engaged) {
                 transform.position = startPosition;
                 startTime = Time.time;
                 flag_engaged = false;

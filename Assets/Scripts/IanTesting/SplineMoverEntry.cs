@@ -25,7 +25,7 @@ namespace Spline
         }
         
         public void SetPosition(float in_time) {
-            Vector3 targetPos = StaticFunctions.GetSplinePosition(currentWaypoint.centerPoint, nextWaypoint.centerPoint, currentWaypoint.controlPoint, nextWaypoint.controlInverse, pathPercent);
+            Vector3 targetPos = StaticFunctions.GetSplinePosition(currentWaypoint.transform.position, nextWaypoint.transform.position, currentWaypoint.control.position, StaticFunctions.GetReflection(nextWaypoint.transform.position, nextWaypoint.control.position), pathPercent);
             float moveDistance = Vector3.Distance(ownerTR.position, targetPos);
             velocity = (targetPos - ownerTR.position).normalized * (moveDistance / Time.deltaTime);
 
