@@ -65,8 +65,8 @@ public class Tricks : MonoBehaviour
     {
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
-        animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        animator.enabled = false;
+        animator = Transform.GetComponent<Animator>();
+        //animator.enabled = false;
 
         //checks animation states, used for seeing if animation is finish
         animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -109,7 +109,7 @@ public class Tricks : MonoBehaviour
         //they can call out a trick name or 'gamepad' input
         if (!player._onGround)
         {
-            animator.enabled = true;
+            //animator.enabled = true;
             if (!player.inTrick)
             { 
                 if (negativeOneEightyAction.triggered || word == "negative one eighty")
@@ -254,7 +254,7 @@ public class Tricks : MonoBehaviour
 
             if (player._onGround)
             {
-                animator.enabled = false;
+                //animator.enabled = false;
                 player.playerRgbody.AddForce(player.board.transform.forward * player.potScore / 100, ForceMode.Impulse);
                 player.actScore += player.potScore;
                 player.potScore = 0;
