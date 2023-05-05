@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows.Speech;
+using System.Linq;
 
 
 public class PlayerMover : MonoBehaviour, IMover
@@ -14,6 +17,7 @@ public class PlayerMover : MonoBehaviour, IMover
 
     //Allows player movement, Will be set true via menu play button, set to false at the end of the map
     public bool _inGame = false;
+    public bool paused = false;
 
     //Flags to track player postion
     private bool _inFeature;
@@ -25,7 +29,27 @@ public class PlayerMover : MonoBehaviour, IMover
     public GameObject board;
     private GameObject ground;
     private GameObject prox;
-    
+
+    //Voice comands
+    //keywords are the phrases the game will be looking for
+    public string[] keywords = new string[] { "pause", "negative one eighty", "one eighty", "Backflip", "Backslide", "Frontflip", "Frontslide", "seven twenty", "three sixty" };
+    public ConfidenceLevel confidence = ConfidenceLevel.Medium;
+    protected PhraseRecognizer recognizer;
+    public string results; //results might be extra, consider deleting
+    protected string word = ""; //what the player has said
+
+    public InputAction jumpAction;
+
+    private void OnEnable()
+    {
+        jumpAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        jumpAction.Disable();
+    }
+
     float timeCount = 0.0f;
 
     //Score
@@ -59,6 +83,30 @@ public class PlayerMover : MonoBehaviour, IMover
         boardStat = board.GetComponent<Board>();
         runTimer = new Stopwatch();
         airTimer = new Stopwatch();
+
+        //fills the voice conrol recognizer with the keyword list
+        if (keywords != null)
+        {
+            recognizer = new KeywordRecognizer(keywords, confidence);
+            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+            recognizer.Start();
+        }
+    }
+
+    private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        word = args.text;
+        results = "You said: <b>" + word + "</b>";
+    }
+
+    //shuts down voice recognition when the game closes
+    private void OnApplicationQuit()
+    {
+        if (recognizer != null && recognizer.IsRunning)
+        {
+            recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
+            recognizer.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -144,7 +192,11 @@ public class PlayerMover : MonoBehaviour, IMover
                     //adding a constant force based on where the board is facing (not player camera)
                     //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
                     //so that it is positioned 1 unit in front of the player.
-                    playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
+                    if (playerRgbody.velocity.sqrMagnitude < boardStat.boardMaxSpeed)
+                    {
+                        playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
+                    }
+                    
 
 
                     //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
@@ -153,6 +205,33 @@ public class PlayerMover : MonoBehaviour, IMover
 
                     //old code, use if things get hard
                     //transform.position += cameraDir * Time.deltaTime;
+
+                    if (jumpAction.triggered)
+                    {
+                        //player jumps
+                        playerRgbody.velocity = new Vector3(0, 10, 0);
+                    }
+
+                    if (word == "pause")
+                    {
+                        if (paused)
+                        {
+                            while (Time.timeScale != 1)
+                            {
+                                Time.timeScale += 1;
+                                paused = false;
+                            }
+                        }
+                        else
+                        {
+                            while (Time.timeScale != 0)
+                            {
+                                Time.timeScale -= 1;
+                                paused = true;
+                            }
+                        }
+                        
+                    }
                 }
             }
 

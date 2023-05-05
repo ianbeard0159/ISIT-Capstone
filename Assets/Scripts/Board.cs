@@ -12,6 +12,10 @@ public class Board : MonoBehaviour
     [SerializeField]
     public float boardRotSpeed = 0.10f;
 
+    //Rotational Movement
+    [SerializeField]
+    public float boardMaxSpeed = 20f;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -22,7 +22,7 @@ public class Tricks : MonoBehaviour
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
-    protected string word = ""; //what the play has said
+    protected string word = ""; //what the player has said
 
     //Inputs for the tricks, button triggers are made in the unity inspector
     public InputAction negativeOneEightyAction;
@@ -65,7 +65,7 @@ public class Tricks : MonoBehaviour
     {
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
-        animator = Transform.GetComponent<Animator>();
+        //animator = Transform.GetComponent<Animator>();
         //animator.enabled = false;
 
         //checks animation states, used for seeing if animation is finish
