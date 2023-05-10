@@ -316,12 +316,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRgbody: {fileID: 0}
   _inGame: 0
+  paused: 0
   _onGround: 0
   _closeToGround: 0
   board: {fileID: 0}
-  actScore: 0
-  potScore: 0
-  flagScore: 0
+  keywords:
+  - pause
+  - negative one eighty
+  - one eighty
+  - Backflip
+  - Backslide
+  - Frontflip
+  - Frontslide
+  - seven twenty
+  - three sixty
+  confidence: 1
+  results: 
+  jumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d241ca64-a3bf-4b72-9cc7-02fee758cdb1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  actTrickScore: 0
+  potTrickScore: 0
+  markerScore: 0
   highSpeed: 0
   airTime: 0
   runTime: 0
@@ -566,8 +588,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3292078388309885240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0.758, z: 0.703}
+  m_LocalScale: {x: 5.442, y: 5.442, z: 5.442}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
@@ -1097,8 +1119,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7385408880088797189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.000000059605, y: 0.931, z: 0.422}
+  m_LocalScale: {x: 2.6188478, y: 2.6188478, z: 2.5187027}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
@@ -1277,3 +1299,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardSpeed: 1
   boardRotSpeed: 0.1
+  boardMaxSpeed: 20

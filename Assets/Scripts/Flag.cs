@@ -22,7 +22,7 @@ public class Flag : MonoBehaviour
     {
         if (in_collider.gameObject.CompareTag("Player"))
         {
-            player.flagScore += 100;
+            player.markerScore += 100;
         }
     }
 }

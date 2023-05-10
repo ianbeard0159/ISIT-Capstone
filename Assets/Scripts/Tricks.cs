@@ -18,11 +18,14 @@ public class Tricks : MonoBehaviour
     
     //Voice comands
     //keywords are the phrases the game will be looking for
-    public string[] keywords = new string[] { "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
+    public string[] keywords = new string[] { "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
     protected string word = ""; //what the player has said
+
+    public bool paused = false;
+
 
     //Inputs for the tricks, button triggers are made in the unity inspector
     public InputAction negativeOneEightyAction;
@@ -65,11 +68,11 @@ public class Tricks : MonoBehaviour
     {
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
-        //animator = Transform.GetComponent<Animator>();
-        //animator.enabled = false;
+        animator = GetComponentInChildren<Animator>();
+        animator.enabled = false;
 
         //checks animation states, used for seeing if animation is finish
-        animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        //animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //fills the voice conrol recognizer with the keyword list
         if (keywords != null)
@@ -109,7 +112,7 @@ public class Tricks : MonoBehaviour
         //they can call out a trick name or 'gamepad' input
         if (!player._onGround)
         {
-            //animator.enabled = true;
+            animator.enabled = true;
             if (!player.inTrick)
             { 
                 if (negativeOneEightyAction.triggered || word == "negative one eighty")
@@ -122,11 +125,11 @@ public class Tricks : MonoBehaviour
                     //in this trick matches the last trick, player recieves reduced points
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     //set this trick as the last trick
                     lastTrick = word;
@@ -138,11 +141,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("180");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -153,11 +156,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("Backflip");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -168,11 +171,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("Backslide");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -183,11 +186,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("Frontflip");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -198,11 +201,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("Frontslide");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -213,11 +216,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("720");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";                
@@ -228,11 +231,11 @@ public class Tricks : MonoBehaviour
                     animator.Play("360");
                     if (word == lastTrick)
                     {
-                        player.potScore += 500;
+                        player.potTrickScore += 500;
                     }
                     else
                     {
-                        player.potScore += 1000;
+                        player.potTrickScore += 1000;
                     }
                     lastTrick = word;
                     word = "";
@@ -245,7 +248,7 @@ public class Tricks : MonoBehaviour
                     //crash
                     //visual animation
                     player.playerRgbody.AddForce(player.board.transform.forward * -20, ForceMode.Impulse);
-                    player.potScore = 0;
+                    player.potTrickScore = 0;
                     player.inTrick = false;
                     lastTrick = "";
                     word = "";
@@ -255,9 +258,9 @@ public class Tricks : MonoBehaviour
             if (player._onGround)
             {
                 //animator.enabled = false;
-                player.playerRgbody.AddForce(player.board.transform.forward * player.potScore / 100, ForceMode.Impulse);
-                player.actScore += player.potScore;
-                player.potScore = 0;
+                player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
+                player.actTrickScore += player.potTrickScore;
+                player.potTrickScore = 0;
                 player.inTrick = false;
                 lastTrick = "";
                 word = "";
@@ -267,6 +270,26 @@ public class Tricks : MonoBehaviour
                 animationFinished = true;
                 player.inTrick = false;
             }
+        }
+        if (word == "pause")
+        {
+            if (paused)
+            {
+                while (Time.timeScale != 1)
+                {
+                    Time.timeScale += 1;
+                    paused = false;
+                }
+            }
+            else
+            {
+                while (Time.timeScale != 0)
+                {
+                    Time.timeScale -= 1;
+                    paused = true;
+                }
+            }
+
         }
     }
 

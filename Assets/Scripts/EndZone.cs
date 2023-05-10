@@ -7,6 +7,9 @@ public class EndZone : MonoBehaviour
     private GameObject startPoint;
     private PlayerMover pMover;
     private Rigidbody pRB;
+    private Collider inCollider;
+    private bool activate = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,26 +17,33 @@ public class EndZone : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (activate)
+        {
+            if (inCollider.CompareTag("Player"))
+            {
+                pRB = inCollider.gameObject.GetComponent<Rigidbody>();
+                pMover = inCollider.gameObject.GetComponent<PlayerMover>();
+                pMover._inGame = false;
+                if (pRB.velocity.magnitude != 0)
+                {
+                    pRB.AddForce(-pRB.velocity, ForceMode.Acceleration);
+                }
+                
+                if (pRB.velocity.magnitude < 0.01)
+                {
+                    inCollider.transform.position = startPoint.transform.position;
+                    pMover._inGame = true;
+                    activate = false;
+                }
+            }
+        }
     }
 
     void OnTriggerEnter(Collider in_collider)
     {
-        if (in_collider.CompareTag("Player"))
-        {
-            pRB = in_collider.gameObject.GetComponent<Rigidbody>();
-            pMover = in_collider.gameObject.GetComponent<PlayerMover>();
-            pMover._inGame = false;
-            if (pRB.velocity.magnitude > 0)
-            {
-                pRB.AddForce(-in_collider.transform.forward * 10);
-            }
-            else
-            {
-                in_collider.transform.position = startPoint.transform.position;
-            }            
-        }
+        inCollider = in_collider;
+        activate = true;
     }
 }
