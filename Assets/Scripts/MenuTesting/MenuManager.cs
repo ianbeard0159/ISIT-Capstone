@@ -18,9 +18,17 @@ public class MenuManager : MonoBehaviour
         Panel[] panels = GetComponentsInChildren<Panel>();
 
         foreach (Panel panel in panels)
+        {
             panel.Setup(this);
 
+            //disable child colliders in each panel
+            SetColliders(panel, false);
+        }
+            
+
         currentPanel.Show();
+        //enable child colliders in main panel
+        SetColliders(currentPanel, true);
     }
 
     private void Update()
@@ -49,8 +57,23 @@ public class MenuManager : MonoBehaviour
     private void SetCurrent(Panel newPanel)
     {
         currentPanel.Hide();
+        SetColliders(currentPanel, false);
 
         currentPanel = newPanel;
+        SetColliders(currentPanel, true);
+
         currentPanel.Show();
+    }
+
+
+    //this method allows you to toggle all of the colliders in any panel on or off depending on parameters
+    public void SetColliders(Panel newPanel, bool which)
+    {
+        var collidersObj = newPanel.GetComponentsInChildren<Collider>();
+        for (var index = 0; index < collidersObj.Length; index++)
+        {
+            var colliderItem = collidersObj[index];
+            colliderItem.enabled = which;
+        }
     }
 }
