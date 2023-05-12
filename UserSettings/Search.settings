@@ -10,6 +10,9 @@ scopes = {
 	"last_search.2138236A" = "xr interaction manager"
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
+	"last_search.DA949528" = "Fluid Dynamics"
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
 }
 providers = {
 	adb = {
@@ -56,6 +59,10 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	" Fluid Dynamics"
+	" Unity's Fluid Dynamics "
+	"g"
+	"standa"
 	"xr interaction manager"
 ]
 searchItemFavorites = [
