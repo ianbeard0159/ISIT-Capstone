@@ -128,6 +128,7 @@ namespace Spline
         }
         void CalculatePathDistance() {
             if (!flag_isInitialized) Init();
+            entryInverse = StaticFunctions.GetReflection(startPoint.transform.position, entryControl.transform.position);
 
             float numberOfPoints = 10;
 
@@ -176,6 +177,9 @@ namespace Spline
 
             Gizmos.color = Color.green;
             float numberOfPoints = 10;
+
+            entryInverse = StaticFunctions.GetReflection(startPoint.transform.position, entryControl.transform.position);
+            Gizmos.DrawSphere(entryInverse, 1f);
 
             // Draw path from starting point to first waypoint
             for (int i = 0; i < numberOfPoints; i++) {
