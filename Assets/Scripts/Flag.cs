@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip clip;
+
     private PlayerMover player;
 
     // Start is called before the first frame update
@@ -22,7 +25,8 @@ public class Flag : MonoBehaviour
     {
         if (in_collider.gameObject.CompareTag("Player"))
         {
-            player.flagScore += 100;
+            player.markerScore += 100;
+            source.Play();
         }
     }
 }
