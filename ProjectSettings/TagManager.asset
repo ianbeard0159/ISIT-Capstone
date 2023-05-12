@@ -7,11 +7,12 @@ TagManager:
   - Board
   - Prox
   - Ground
+  - StartPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Editor Only
   - Water
   - UI
   - 
