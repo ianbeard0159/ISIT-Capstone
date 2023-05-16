@@ -114,7 +114,7 @@ public class Tricks : MonoBehaviour
         {
             animator.enabled = true;
             if (!player.inTrick)
-            { 
+            {
                 if (negativeOneEightyAction.triggered || word == "negative one eighty")
                 {
                     //once in a trick, set intrick to true, play the animation
@@ -165,7 +165,7 @@ public class Tricks : MonoBehaviour
                     lastTrick = word;
                     word = "";
                 }
-                if (backslideAction.triggered || word == "Backslide") 
+                if (backslideAction.triggered || word == "Backslide")
                 {
                     player.inTrick = true;
                     animator.Play("Backslide");
@@ -223,7 +223,7 @@ public class Tricks : MonoBehaviour
                         player.potTrickScore += 1000;
                     }
                     lastTrick = word;
-                    word = "";                
+                    word = "";
                 }
                 if (threeSixtyAction.triggered || word == "three sixty")
                 {
@@ -240,9 +240,29 @@ public class Tricks : MonoBehaviour
                     lastTrick = word;
                     word = "";
                 }
+                if (player._onGround)
+                {
+                    //animator.enabled = false;
+                    player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
+                    player.actTrickScore += player.potTrickScore;
+                    player.potTrickScore = 0;
+                    player.inTrick = false;
+                    lastTrick = "";
+                    word = "";
+                }
             }
             else
             {
+                if (player._onGround)
+                {
+                    //animator.enabled = false;
+                    player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
+                    player.actTrickScore += player.potTrickScore;
+                    player.potTrickScore = 0;
+                    player.inTrick = false;
+                    lastTrick = "";
+                    word = "";
+                }
                 if (player._onGround)
                 {
                     //crash
@@ -253,17 +273,6 @@ public class Tricks : MonoBehaviour
                     lastTrick = "";
                     word = "";
                 }
-            }
-
-            if (player._onGround)
-            {
-                //animator.enabled = false;
-                player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
-                player.actTrickScore += player.potTrickScore;
-                player.potTrickScore = 0;
-                player.inTrick = false;
-                lastTrick = "";
-                word = "";
             }
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
