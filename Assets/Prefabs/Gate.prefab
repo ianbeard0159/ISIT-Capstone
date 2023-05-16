@@ -2127,7 +2127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8697379933478282047}
   - component: {fileID: 520782381944655906}
-  - component: {fileID: 8636248861569058997}
+  - component: {fileID: -708439943118650996}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   clip: {fileID: 0}
---- !u!82 &8636248861569058997
+--- !u!82 &-708439943118650996
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2181,7 +2181,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c4fa76264f0c91444ab26f271a1a11ed, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.609
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

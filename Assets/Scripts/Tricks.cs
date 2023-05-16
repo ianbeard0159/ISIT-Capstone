@@ -18,13 +18,17 @@ public class Tricks : MonoBehaviour
     
     //Voice comands
     //keywords are the phrases the game will be looking for
-    public string[] keywords = new string[] { "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
+    public string[] keywords = new string[] {"stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
     protected string word = ""; //what the player has said
 
-    public bool paused = false;
+    public GameObject pauseMenuUI;
+    public Transform playerReference;
+    public Vector3 offset;
+    private bool isGamePaused = false;
+    private bool shouldBePaused = false;
 
 
     //Inputs for the tricks, button triggers are made in the unity inspector
@@ -280,26 +284,46 @@ public class Tricks : MonoBehaviour
                 player.inTrick = false;
             }
         }
-        if (word == "pause")
+        if (word == "pause" || word == "stop")
         {
-            if (paused)
-            {
-                while (Time.timeScale != 1)
-                {
-                    Time.timeScale += 1;
-                    paused = false;
-                }
-            }
+            if (shouldBePaused)
+                shouldBePaused = false;
             else
+                shouldBePaused = true;
+            if (shouldBePaused && !isGamePaused)
             {
-                while (Time.timeScale != 0)
-                {
-                    Time.timeScale -= 1;
-                    paused = true;
-                }
-            }
+                Pause();
 
+            }
+            else if (!shouldBePaused && isGamePaused)
+            {
+                Resume();
+            }
         }
+    }
+
+    public void Resume()
+    {
+        //make the time sacle change over time
+        //pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        Debug.Log("Resume");
+    }
+
+    void Pause()
+    {
+        //pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isGamePaused = true;
+        SetMenuPosition();
+        Debug.Log("Pause");
+    }
+
+    void SetMenuPosition()
+    {
+        pauseMenuUI.transform.position = playerReference.position + offset;
+        pauseMenuUI.transform.rotation = playerReference.rotation;
     }
 
     //shuts down voice recognition when the game closes
