@@ -72,7 +72,7 @@ namespace Spline
                     }
                     else {
                         // Vector3 targetPos = StaticFunctions.GetSplinePosition(entry.entryPosition, startPoint.transform.position, entryControl.position, entryControl.position, entry.pathPercent);
-                        entry.SetPosition(Time.time, entry.entryPosition, entryControl.position, startPoint.transform.position, entryControl.position);
+                        entry.SetPosition(Time.time, entry.entryPosition, entryControl.position, startPoint.transform.position, entryControl.position, true);
                     }
                     continue;
                 }
@@ -101,7 +101,6 @@ namespace Spline
                     if (waypointIndex + 1 >= waypoints.Count) {
                         entry.owner.flag_engaged = false;
                         entry.ownerRB.velocity = entry.velocity;
-                        Debug.Log(entry.velocity.magnitude);
                         entry.flag_onPath = false;
                         continue;
                     }
@@ -157,12 +156,12 @@ namespace Spline
                 for (int j = 0; j < numberOfPoints; j++) {
                     float precent = j / numberOfPoints;
                     Vector3 drawPoint = StaticFunctions.GetSplinePosition(waypoints[i].transform.position, waypoints[i+1].transform.position, waypoints[i].control.position, StaticFunctions.GetReflection(waypoints[i+1].transform.position, waypoints[i+1].control.position), precent);
-                    Debug.Log($"{i} - {waypoints[i].transform.position}, {waypoints[i+1].transform.position}, {waypoints[i].control.position}, {StaticFunctions.GetReflection(waypoints[i+1].transform.position, waypoints[i+1].control.position)}, {precent}");
+                    //Debug.Log($"{i} - {waypoints[i].transform.position}, {waypoints[i+1].transform.position}, {waypoints[i].control.position}, {StaticFunctions.GetReflection(waypoints[i+1].transform.position, waypoints[i+1].control.position)}, {precent}");
                     
                     distanceSum += Vector3.Distance(drawPoint, lastPoint);
                     
                     lastPoint = drawPoint;
-                    Debug.Log(distanceSum);
+                    //Debug.Log(distanceSum);
                 }
                 waypoints[i+1].pathDistance = distanceSum * distanceModifier;
             }
@@ -202,7 +201,7 @@ namespace Spline
             in_mover.flag_engaged = true;
             SplineMoverEntry entry = new SplineMoverEntry(in_mover);
             entry.flag_onPath = true;
-            Debug.Log(entry.ownerRB.velocity.magnitude);
+            //Debug.Log(entry.ownerRB.velocity.magnitude);
             entry.initialVelocity = entry.ownerRB.velocity.magnitude;
             engagedMovers.Add(entry);
         }
