@@ -21,8 +21,11 @@ public class Kicker : MonoBehaviour
 
     void OnTriggerEnter(Collider in_collider)
     {
-        Rigidbody mover = in_collider.gameObject.GetComponent<Rigidbody>();
+        if (in_collider.CompareTag("Player") )
+        {
+            Rigidbody mover = in_collider.gameObject.GetComponent<Rigidbody>();
 
-        mover.AddForce(in_collider.transform.forward * LiftSpeed, ForceMode.Impulse);
+            mover.AddForce(in_collider.transform.forward * LiftSpeed, ForceMode.Impulse);
+        }
     }
 }
