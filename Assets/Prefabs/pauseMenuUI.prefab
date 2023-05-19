@@ -244,7 +244,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToPrevious
         m_Mode: 1
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 4388435716535342402}
   - component: {fileID: 4388435716535342403}
   m_Layer: 5
-  m_Name: SpareButton
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SetCurrentWithHistory
         m_Mode: 2
@@ -497,9 +497,8 @@ GameObject:
   - component: {fileID: 4388435716727385681}
   - component: {fileID: 4388435716727385682}
   - component: {fileID: 4388435716727385683}
-  - component: {fileID: 4388435716727385684}
   - component: {fileID: 4388435716727385685}
-  - component: {fileID: 4388435716727385695}
+  - component: {fileID: 2647451133283393380}
   m_Layer: 5
   m_Name: pauseMenuUI
   m_TagString: Untagged
@@ -593,19 +592,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4388435716727385684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4388435716727385686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20512b72a9b963d42b73cc4f4d6f8e70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPanel: {fileID: 4388435717943251377}
 --- !u!114 &4388435716727385685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,7 +611,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &4388435716727385695
+--- !u!114 &2647451133283393380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,12 +620,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4388435716727385686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c566a88f93a66a4f9c8290a96a031fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 20512b72a9b963d42b73cc4f4d6f8e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 4388435716727385686}
-  playerReference: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
+  currentPanel: {fileID: 0}
 --- !u!1 &4388435716876970022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4388435716964138970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1601,7 +1585,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 2647451133283393380}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SetCurrentWithHistory
         m_Mode: 2
@@ -2519,13 +2503,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 2647451133283393380}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToPrevious
-        m_Mode: 1
+        m_MethodName: SetCurrentWithHistory
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4388435717943251377}
+          m_ObjectArgumentAssemblyTypeName: Panel, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3045,7 +3029,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToPrevious
         m_Mode: 1
@@ -4834,7 +4818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: GoToPrevious
         m_Mode: 1
@@ -4968,7 +4952,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SetCurrentWithHistory
         m_Mode: 2
@@ -5303,7 +5287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spare
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5873,7 +5857,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4388435716727385684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SetCurrentWithHistory
         m_Mode: 2
