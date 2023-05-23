@@ -56,6 +56,15 @@ namespace Spline
         // Update is called once per frame
         void FixedUpdate()
         {
+            // Remove any movers that are no longer on the path
+            for (int i = engagedMovers.Count - 1; i >= 0; i--)
+            {
+                if (!engagedMovers[i].flag_onPath)
+                {
+                    engagedMovers.Remove(engagedMovers[i]);
+                }
+            }
+
             foreach (SplineMoverEntry entry in engagedMovers) {
                 // Go from entry zone to start point
                 if (entry.nextWaypoint == null) {
@@ -116,14 +125,7 @@ namespace Spline
                 //Debug.Log($"{entry.pathPercent} = ({Time.time} - {entry.startTime}) / ({entry.nextWaypoint.pathDistance} / {entry.initialVelocity})");
                 entry.SetPosition(Time.time);
             }
-
-            // Remove any movers that are no longer on the path
-            for (int i = engagedMovers.Count -1; i >= 0; i--) {
-                if (!engagedMovers[i].flag_onPath) {
-                    engagedMovers.Remove(engagedMovers[i]);
-                }
-            }
-            
+                        
         }
         void CalculatePathDistance() {
             if (!flag_isInitialized) Init();
