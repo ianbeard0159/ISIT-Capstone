@@ -7,7 +7,7 @@ public class EndZone : MonoBehaviour
     private GameObject startPoint;
     private PlayerMover pMover;
     private Rigidbody pRB;
-    private Collider inCollider;
+    private Collider in_collider;
     private bool activate = false;
 
     [SerializeField] float slowdownPercent = 0.25f;
@@ -35,15 +35,17 @@ public class EndZone : MonoBehaviour
     {
         if (activate)
         {
+            pMover = in_collider.gameObject.GetComponent<PlayerMover>();
             pMover.runTimer.Stop();
             pMover.runTime = pMover.runTimer.Elapsed.TotalSeconds;
-            pRB = inCollider.gameObject.GetComponent<Rigidbody>();
-            pMover = inCollider.gameObject.GetComponent<PlayerMover>();
+            pRB = in_collider.gameObject.GetComponent<Rigidbody>();
             pMover._inGame = false;
+            Debug.Log("in endzone slowdown");
             if (currentState == SlowdownState.normalTime) currentState = SlowdownState.slowing;
 
             if (currentState == SlowdownState.slowing)
             {
+                Debug.Log("slowing down");
                 if (Time.timeScale > slowdownPercent)
                 {
                     if (Time.timeScale - slowdownStep < slowdownPercent) Time.timeScale = slowdownPercent;
@@ -55,21 +57,26 @@ public class EndZone : MonoBehaviour
                     currentState = SlowdownState.slowTime;
                 }
             }
-            if (Time.timeScale == 0)
+            if (Time.timeScale <= slowdownPercent)
             {
-                inCollider.transform.position = startPoint.transform.position;
+                Debug.Log("Done slowing down");
+                Time.timeScale = 1;
+                in_collider.transform.position = startPoint.transform.position;
                 pMover._inGame = true;
+                pMover._onGround = true;
+                pMover._closeToGround = true;
                 activate = false;
+                pRB.velocity = Vector3.zero;
                 pMover.runTimer.Restart();
             }
         }
     }
 
-    void OnTriggerEnter(Collider in_collider)
+    void OnTriggerEnter(Collider other)
     {
-        if (in_collider.CompareTag("Player") && !activate)
+        if (other.CompareTag("Player") && !activate)
         {
-            inCollider = in_collider;
+            in_collider = other;
             activate = true;
         }
     }

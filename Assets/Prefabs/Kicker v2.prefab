@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797120061428746534}
   m_LocalRotation: {x: -0.185722, y: -0, z: -0, w: 0.9826024}
-  m_LocalPosition: {x: -0.030139923, y: 0.2588245, z: 0.5956722}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.030139923, y: 0.82, z: 2.01}
+  m_LocalScale: {x: 1, y: 1, z: 3.1344}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7880517235810713528}
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354732c2f7c58bf40b68bcf8d07a3563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LiftSpeed: 0
 --- !u!1 &7643870044289669386
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +374,7 @@ GameObject:
   - component: {fileID: 2672177728722103458}
   m_Layer: 0
   m_Name: Kicker v2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,17 +609,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 2992
   m_IsSelectable: 1
-  m_SelectedFaces: 05000000
-  m_SelectedEdges:
-  - a: 20
-    b: 21
-  - a: 22
-    b: 20
-  - a: 21
-    b: 23
-  - a: 23
-    b: 22
-  m_SelectedVertices: 14000000150000001600000017000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &7266871230913631550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,7 +659,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c41a562ca2686f746a1deaedc5ccc788, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
