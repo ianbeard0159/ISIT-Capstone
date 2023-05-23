@@ -122,8 +122,8 @@ public class PlayerMover : MonoBehaviour, IMover
         transform.rotation = rot;
         float speed = playerRgbody.velocity.magnitude;
 
-        playerRgbody.velocity = Vector3.zero;
-        Vector3 desiredVelocity = speed * newRotation;// boardRotation.eulerAngles.normalized;
+        //playerRgbody.velocity = Vector3.zero;
+        //Vector3 desiredVelocity = speed * newRotation;// boardRotation.eulerAngles.normalized;
         Vector3 gravity = Physics.gravity; // + new Vector3(0,-50f,0);
 
 
@@ -138,12 +138,12 @@ public class PlayerMover : MonoBehaviour, IMover
                 UnityEngine.Debug.Log("FALLING");
                 UnityEngine.Debug.Log("GRAVITY : " + gravity);
                 UnityEngine.Debug.Log("TIME : " + timeCount);
-                UnityEngine.Debug.Log("Going : " + desiredVelocity);
-                playerRgbody.velocity = desiredVelocity + gravity;
+                //UnityEngine.Debug.Log("Going : " + desiredVelocity);
+                //playerRgbody.velocity = desiredVelocity + gravity;
                 UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
                 //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
                 //playerRgbody.velocity = desiredVelocity;
-                //playerRgbody.AddForce(10 * Vector3.down);
+                playerRgbody.AddForce(gravity);
                 //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
             }
             
@@ -153,8 +153,8 @@ public class PlayerMover : MonoBehaviour, IMover
                 //adding a constant force based on where the board is facing (not player camera)
                 //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
                 //so that it is positioned 1 unit in front of the player.
-                UnityEngine.Debug.Log("Going : " + desiredVelocity);
-                playerRgbody.velocity = desiredVelocity;
+                //UnityEngine.Debug.Log("Going : " + desiredVelocity);
+                //playerRgbody.velocity = desiredVelocity;
             }
 
             //    //if (!_onGround)
