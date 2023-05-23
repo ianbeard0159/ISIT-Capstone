@@ -8,6 +8,14 @@ TagManager:
   - Prox
   - Ground
   - StartPoint
+  - UITrigger1
+  - UITrigger2
+  - UITrigger3
+  - UITrigger4
+  - UITrigger5
+  - UITrigger6
+  - UITrigger7
+  - UITrigger8
   layers:
   - Default
   - TransparentFX
