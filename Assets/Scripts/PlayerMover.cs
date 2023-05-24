@@ -120,12 +120,8 @@ public class PlayerMover : MonoBehaviour, IMover
         //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
         rot = Quaternion.Lerp(transform.rotation, boardRotation, boardStat.boardRotSpeed * timeCount);
         transform.rotation = rot;
-        float speed = playerRgbody.velocity.magnitude;
 
-        //playerRgbody.velocity = Vector3.zero;
-        //Vector3 desiredVelocity = speed * newRotation;// boardRotation.eulerAngles.normalized;
         Vector3 gravity = Physics.gravity; // + new Vector3(0,-50f,0);
-
 
         if (_inGame)
         {
@@ -150,39 +146,31 @@ public class PlayerMover : MonoBehaviour, IMover
             else if (_onGround)
             {
                 UnityEngine.Debug.Log("ON GROUND");
+                float speed = playerRgbody.velocity.magnitude;
+
+                playerRgbody.velocity = Vector3.zero;
+                Vector3 desiredVelocity = speed * newRotation;// boardRotation.eulerAngles.normalized;
+                
                 //adding a constant force based on where the board is facing (not player camera)
                 //note: this is due to the forward property being Normalized, meaning it has a magnitude of 1,
                 //so that it is positioned 1 unit in front of the player.
-                //UnityEngine.Debug.Log("Going : " + desiredVelocity);
-                //playerRgbody.velocity = desiredVelocity;
-            }
+                if ((playerRgbody.velocity.magnitude < boardStat.boardMaxSpeed))
+                {                    
+                    playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
+                    UnityEngine.Debug.Log("MOVING");
+                    UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
+                }
+                UnityEngine.Debug.Log("Going : " + desiredVelocity);
+                playerRgbody.velocity = desiredVelocity;
 
-            //    //if (!_onGround)
-            //    //{
-            //    //    playerRgbody.velocity = desiredVelocity + gravity * Time.fixedDeltaTime;
-            //    //}
-            //    //else
-            //    //{
-            //    //    playerRgbody.velocity = desiredVelocity;
-            //    //}
-
-            //    //UnityEngine.Debug.Log("gravity : " + gravity);
-            //    //playerRgbody.rotation = rot;
-
-            //    //UnityEngine.Debug.Log("speed : " + speed);
-            //    //UnityEngine.Debug.Log("board rotation : " + newRotation);
-            //    // UnityEngine.Debug.Log("new velocity : " + speed * newRotation);
+                //UnityEngine.Debug.Log("speed : " + speed);
+                //UnityEngine.Debug.Log("board rotation : " + newRotation);
+                // UnityEngine.Debug.Log("new velocity : " + speed * newRotation);
 
 
-            //    //old code, use if things get hard
-            //    //transform.position += cameraDir * Time.deltaTime;        
+                //old code, use if things get hard
+                //transform.position += cameraDir * Time.deltaTime;        
 
-            //}
-            if ((playerRgbody.velocity.magnitude < boardStat.boardMaxSpeed) && (_onGround))
-            {
-                playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
-                UnityEngine.Debug.Log("MOVING");
-                UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
             }
             if (!_closeToGround)
             {

@@ -10,6 +10,11 @@ public class EndZone : MonoBehaviour
     private Collider in_collider;
     private bool activate = false;
 
+    float timerOne;
+    float timerTwo;
+    float timerThree;
+    Animator animator;
+
     [SerializeField] float slowdownPercent = 0.25f;
     [SerializeField] float slowdownStep = 0.01f;
     float startTime = 1;
@@ -26,6 +31,7 @@ public class EndZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GameObject.FindGameObjectWithTag("Blindfold").GetComponent<Animator>();
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         currentState = SlowdownState.normalTime;
     }
@@ -59,15 +65,28 @@ public class EndZone : MonoBehaviour
             }
             if (Time.timeScale <= slowdownPercent)
             {
+                //Corutine?
                 Debug.Log("Done slowing down");
-                Time.timeScale = 1;
-                in_collider.transform.position = startPoint.transform.position;
-                pMover._inGame = true;
-                pMover._onGround = true;
-                pMover._closeToGround = true;
-                activate = false;
-                pRB.velocity = Vector3.zero;
-                pMover.runTimer.Restart();
+                if (timerOne > 4)
+                {
+                    animator.SetBool("isActive", true);
+                    if (timerTwo > 2)
+                    {
+                        in_collider.transform.position = startPoint.transform.position;
+                        animator.SetBool("isActive", false);
+                        if (timerThree > 2)
+                        {
+                            Time.timeScale = 1;
+                            pMover._inGame = true;
+                            pMover._onGround = true;
+                            pMover._closeToGround = true;
+                            activate = false;
+                            pRB.velocity = Vector3.zero;
+                            pMover.runTimer.Restart();                            
+                        }
+                    }
+                }
+
             }
         }
     }
