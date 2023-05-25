@@ -46,6 +46,11 @@ public class Tricks : MonoBehaviour
     public InputAction jumpAction;
     public InputAction unstuck;
 
+    //boolean to toss the player off of a spline when reset from pause menu
+    public static bool pauseReset;
+    //int to manage time to hover
+    public static int hoverTime;
+
     //When this script is enabled, all the actions are also enabled
     private void OnEnable()
     {
@@ -79,6 +84,10 @@ public class Tricks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //set pausereset to false
+        pauseReset = false;
+        hoverTime = 0;
+
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player");
         pMover = player.GetComponent<PlayerMover>();

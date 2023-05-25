@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Spline 
@@ -20,6 +21,7 @@ namespace Spline
         private Transform entryControl;
         private Vector3 entryInverse;
         [SerializeField] private float distanceModifier = 1.5f;
+
 
         void Init() {
             engagedMovers = new List<SplineMoverEntry>();
@@ -56,6 +58,13 @@ namespace Spline
         // Update is called once per frame
         void FixedUpdate()
         {
+            //check if pauseReset has been flipped; if so, toss out all movers
+            //currently bugged and player will have 0 control when this is done
+            if (Tricks.pauseReset == true)
+            {
+                TossMovers();
+            }
+
             // Remove any movers that are no longer on the path
             for (int i = engagedMovers.Count - 1; i >= 0; i--)
             {
@@ -66,6 +75,9 @@ namespace Spline
             }
 
             foreach (SplineMoverEntry entry in engagedMovers) {
+
+
+
                 // Go from entry zone to start point
                 if (entry.nextWaypoint == null) {
                     if (entry.startTime == -1) {
@@ -124,6 +136,7 @@ namespace Spline
                 }
                 //Debug.Log($"{entry.pathPercent} = ({Time.time} - {entry.startTime}) / ({entry.nextWaypoint.pathDistance} / {entry.initialVelocity})");
                 entry.SetPosition(Time.time);
+
             }
                         
         }
@@ -206,6 +219,17 @@ namespace Spline
             //Debug.Log(entry.ownerRB.velocity.magnitude);
             entry.initialVelocity = entry.ownerRB.velocity.magnitude;
             engagedMovers.Add(entry);
+        }
+
+        //toss out all movers immediately
+        void TossMovers()
+        {
+            for (int i = engagedMovers.Count - 1; i >= 0; i--)
+            {
+                engagedMovers[i].owner.flag_engaged = false;
+                engagedMovers.Remove(engagedMovers[i]);
+            }
+            UnityEngine.Debug.Log("Movers tossed");
         }
     }   
 }
