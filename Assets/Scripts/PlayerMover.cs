@@ -141,8 +141,7 @@ public class PlayerMover : MonoBehaviour, IMover
                 //playerRgbody.velocity = desiredVelocity;
                 playerRgbody.AddForce(gravity);
                 //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
-            }
-            
+            }            
             else if (_onGround)
             {
                 UnityEngine.Debug.Log("ON GROUND");
@@ -169,21 +168,12 @@ public class PlayerMover : MonoBehaviour, IMover
 
 
                 //old code, use if things get hard
-                //transform.position += cameraDir * Time.deltaTime;        
+                //transform.position += cameraDir * Time.deltaTime;       
 
             }
             if (!_closeToGround)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed / 10) * timeCount);
-            }
-            if (jumpAction.triggered)
-            {
-                //player jumps
-                //playerRgbody.velocity.y = new Vector3(0, 100, 0);
-                Vector3 temp = transform.position;
-                temp.y += 10;
-                transform.position = temp;
-                //playerRgbody.AddForce(Vector3.up * 1000, ForceMode.Impulse);
             }
             timeCount = timeCount + Time.deltaTime;
         }

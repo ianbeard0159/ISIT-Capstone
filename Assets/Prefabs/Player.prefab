@@ -198,6 +198,24 @@ MonoBehaviour:
       m_Action: Frontslide
       m_Flags: 0
     m_Flags: 0
+  jumpAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  unstuck:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!95 &1976542559342712117
 Animator:
   serializedVersion: 4
@@ -523,6 +541,24 @@ MonoBehaviour:
       m_Action: Frontslide
       m_Flags: 0
     m_Flags: 0
+  jumpAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6409ce7f-e3e5-45e1-a78f-89094f80698d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  unstuck:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a29d4f06-ca74-4ef2-807b-a0335ac384ac
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1240951791401158715
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +620,7 @@ Transform:
   m_GameObject: {fileID: 3292078388309885240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.758, z: 0.703}
-  m_LocalScale: {x: 5.442, y: 5.442, z: 5.442}
+  m_LocalScale: {x: 4.2394814, y: 4.2394814, z: 4.2394814}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
