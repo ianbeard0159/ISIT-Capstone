@@ -23,6 +23,7 @@ public class Kicker : MonoBehaviour
     {
         if (in_collider.CompareTag("Player") )
         {
+            Debug.Log("PLAYER IN LIFT ZONE");
             Rigidbody mover = in_collider.gameObject.GetComponent<Rigidbody>();
 
             mover.AddForce(in_collider.transform.forward * LiftSpeed, ForceMode.Impulse);

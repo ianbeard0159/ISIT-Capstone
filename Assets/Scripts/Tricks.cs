@@ -14,11 +14,13 @@ public class Tricks : MonoBehaviour
     bool animationFinished;
 
     //Player mover script
-    private PlayerMover player;
+    GameObject player;
+    private PlayerMover pMover;
+    Rigidbody pRB;
     
     //Voice comands
     //keywords are the phrases the game will be looking for
-    public string[] keywords = new string[] {"stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
+    public string[] keywords = new string[] {"go", "unstuck","resume","stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
@@ -29,6 +31,7 @@ public class Tricks : MonoBehaviour
     public Vector3 offset;
     private bool isGamePaused = false;
     private bool shouldBePaused = false;
+    Vector3 returnMenuPosition;
 
 
     //Inputs for the tricks, button triggers are made in the unity inspector
@@ -40,6 +43,8 @@ public class Tricks : MonoBehaviour
     public InputAction backslideAction;
     public InputAction frontflipAction;
     public InputAction frontslideAction;
+    public InputAction jumpAction;
+    public InputAction unstuck;
 
     //When this script is enabled, all the actions are also enabled
     private void OnEnable()
@@ -52,6 +57,8 @@ public class Tricks : MonoBehaviour
         backslideAction.Enable();
         frontflipAction.Enable();
         frontslideAction.Enable();
+        jumpAction.Enable();
+        unstuck.Enable();
     }
 
     //When this script is disabled, all actions are also disabled
@@ -65,14 +72,19 @@ public class Tricks : MonoBehaviour
         backslideAction.Disable();
         frontflipAction.Disable();
         frontslideAction.Disable();
+        jumpAction.Disable();
+        unstuck.Disable();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //get the player mover and animator
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        pMover = player.GetComponent<PlayerMover>();
+        pRB = player.GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        returnMenuPosition = GameObject.FindGameObjectWithTag("ReturnMenuPosition").transform.position;
         animator.enabled = false;
 
         //checks animation states, used for seeing if animation is finish
@@ -89,7 +101,7 @@ public class Tricks : MonoBehaviour
 
         //logs all the avalibe microphones
         foreach (var device in Microphone.devices)
-        {
+        { 
             Debug.Log("Name: " + device);
         }
     }
@@ -98,14 +110,15 @@ public class Tricks : MonoBehaviour
     {
         word = args.text;
         results = "You said: <b>" + word + "</b>";
+        Debug.Log(results);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         //logs the last trick used
         var lastTrick = "";
+        //word = "";
         NTime = animStateInfo.normalizedTime; //grabs the time the animation plays, should max out at 1 (second)
         if (animationFinished)
         {
@@ -114,166 +127,174 @@ public class Tricks : MonoBehaviour
         }
         //if the player is not on the ground, or in a trick,
         //they can call out a trick name or 'gamepad' input
-        if (!player._onGround)
+        if (!pMover._closeToGround)
         {
             animator.enabled = true;
-            if (!player.inTrick)
+            if (!pMover.inTrick)
             {
-                if (negativeOneEightyAction.triggered || word == "negative one eighty")
+                if (pMover.flag_engaged)
                 {
-                    //once in a trick, set intrick to true, play the animation
-                    player.inTrick = true;
-                    animator.Play("-180");
-                    //animator.SetBool();
-                    //animator.SetTrigger();
-                    //in this trick matches the last trick, player recieves reduced points
-                    if (word == lastTrick)
+                    if (negativeOneEightyAction.triggered || word == "negative one eighty")
                     {
-                        player.potTrickScore += 500;
+                        //once in a trick, set intrick to true, play the animation
+                        pMover.inTrick = true;
+                        animator.Play("-180");
+                        //animator.SetBool();
+                        //animator.SetTrigger();
+                        //in this trick matches the last trick, player recieves reduced points
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        //set this trick as the last trick
+                        lastTrick = word;
+                        word = "";
                     }
-                    else
+                    if (oneEightyAction.triggered || word == "one eighty")
                     {
-                        player.potTrickScore += 1000;
+                        pMover.inTrick = true;
+                        animator.Play("180");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
                     }
-                    //set this trick as the last trick
-                    lastTrick = word;
-                    word = "";
+                    if (backslideAction.triggered || word == "Backslide")
+                    {
+                        pMover.inTrick = true;
+                        animator.Play("Backslide");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
+                    }
+                    if (frontslideAction.triggered || word == "Frontslide")
+                    {
+                        pMover.inTrick = true;
+                        animator.Play("Frontslide");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
+                    }
                 }
-                if (oneEightyAction.triggered || word == "one eighty")
+                else
                 {
-                    player.inTrick = true;
-                    animator.Play("180");
-                    if (word == lastTrick)
+                    if (backflipAction.triggered || word == "Backflip")
                     {
-                        player.potTrickScore += 500;
+                        pMover.inTrick = true;
+                        animator.Play("Backflip");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
                     }
-                    else
+
+                    if (frontflipAction.triggered || word == "Frontflip")
                     {
-                        player.potTrickScore += 1000;
+                        pMover.inTrick = true;
+                        animator.Play("Frontflip");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
                     }
-                    lastTrick = word;
-                    word = "";
+
+                    if (sevenTwentyAction.triggered || word == "seven twenty")
+                    {
+                        pMover.inTrick = true;
+                        animator.Play("720");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
+                    }
+                    if (threeSixtyAction.triggered || word == "three sixty")
+                    {
+                        pMover.inTrick = true;
+                        animator.Play("360");
+                        if (word == lastTrick)
+                        {
+                            pMover.potTrickScore += 500;
+                        }
+                        else
+                        {
+                            pMover.potTrickScore += 1000;
+                        }
+                        lastTrick = word;
+                        word = "";
+                    }
                 }
-                if (backflipAction.triggered || word == "Backflip")
-                {
-                    player.inTrick = true;
-                    animator.Play("Backflip");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (backslideAction.triggered || word == "Backslide")
-                {
-                    player.inTrick = true;
-                    animator.Play("Backslide");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (frontflipAction.triggered || word == "Frontflip")
-                {
-                    player.inTrick = true;
-                    animator.Play("Frontflip");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (frontslideAction.triggered || word == "Frontslide")
-                {
-                    player.inTrick = true;
-                    animator.Play("Frontslide");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (sevenTwentyAction.triggered || word == "seven twenty")
-                {
-                    player.inTrick = true;
-                    animator.Play("720");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (threeSixtyAction.triggered || word == "three sixty")
-                {
-                    player.inTrick = true;
-                    animator.Play("360");
-                    if (word == lastTrick)
-                    {
-                        player.potTrickScore += 500;
-                    }
-                    else
-                    {
-                        player.potTrickScore += 1000;
-                    }
-                    lastTrick = word;
-                    word = "";
-                }
-                if (player._onGround)
+                if (pMover._onGround)
                 {
                     //animator.enabled = false;
-                    player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
-                    player.actTrickScore += player.potTrickScore;
-                    player.potTrickScore = 0;
-                    player.inTrick = false;
+                    pMover.playerRgbody.AddForce(pMover.board.transform.forward * pMover.potTrickScore / 100, ForceMode.Impulse);
+                    pMover.actTrickScore += pMover.potTrickScore;
+                    pMover.potTrickScore = 0;
+                    pMover.inTrick = false;
                     lastTrick = "";
                     word = "";
                 }
             }
             else
             {
-                if (player._onGround)
+                if (pMover._onGround)
                 {
                     //animator.enabled = false;
-                    player.playerRgbody.AddForce(player.board.transform.forward * player.potTrickScore / 100, ForceMode.Impulse);
-                    player.actTrickScore += player.potTrickScore;
-                    player.potTrickScore = 0;
-                    player.inTrick = false;
+                    pMover.playerRgbody.AddForce(pMover.board.transform.forward * pMover.potTrickScore / 100, ForceMode.Impulse);
+                    pMover.actTrickScore += pMover.potTrickScore;
+                    pMover.potTrickScore = 0;
+                    pMover.inTrick = false;
                     lastTrick = "";
                     word = "";
                 }
-                if (player._onGround)
+                if (pMover._onGround)
                 {
                     //crash
                     //visual animation
-                    player.playerRgbody.AddForce(player.board.transform.forward * -20, ForceMode.Impulse);
-                    player.potTrickScore = 0;
-                    player.inTrick = false;
+                    pMover.playerRgbody.AddForce(pMover.board.transform.forward * -20, ForceMode.Impulse);
+                    pMover.potTrickScore = 0;
+                    pMover.inTrick = false;
                     lastTrick = "";
                     word = "";
                 }
@@ -281,24 +302,47 @@ public class Tricks : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
                 animationFinished = true;
-                player.inTrick = false;
+                pMover.inTrick = false;
             }
         }
         if (word == "pause" || word == "stop")
         {
+            Debug.Log("CALLING STOP!");
             if (shouldBePaused)
                 shouldBePaused = false;
             else
                 shouldBePaused = true;
-            if (shouldBePaused && !isGamePaused)
-            {
-                Pause();
 
-            }
-            else if (!shouldBePaused && isGamePaused)
-            {
-                Resume();
-            }
+            Debug.Log("SHOULD BE PAUSED : " + shouldBePaused);
+            word = "";
+        }
+        if (word == "resume" || word == "go")
+        {
+            Debug.Log("UNPAUSE!");
+            shouldBePaused = false;
+            word = "";
+        }
+        if (word == "unstuck" || unstuck.triggered)
+        {
+            Vector3 temp = transform.position;
+            temp.y += 10;
+            player.transform.position = temp;
+            word = "";
+        }
+        if (word == "jump" || jumpAction.triggered)
+        {
+            pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
+            word = "";
+        }
+
+        if (shouldBePaused && !isGamePaused)
+        {
+            Pause();
+
+        }
+        else if (!shouldBePaused && isGamePaused)
+        {
+            Resume();
         }
     }
 
@@ -306,6 +350,7 @@ public class Tricks : MonoBehaviour
     {
         //make the time sacle change over time
         //pauseMenuUI.SetActive(false);
+        ReturnMenuPosition();
         Time.timeScale = 1f;
         isGamePaused = false;
         Debug.Log("Resume");
@@ -314,16 +359,23 @@ public class Tricks : MonoBehaviour
     void Pause()
     {
         //pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        
         isGamePaused = true;
+        Debug.Log(isGamePaused);
         SetMenuPosition();
+        Time.timeScale = 0f;
         Debug.Log("Pause");
     }
 
     void SetMenuPosition()
     {
-        pauseMenuUI.transform.position = playerReference.position + offset;
-        pauseMenuUI.transform.rotation = playerReference.rotation;
+        pauseMenuUI.transform.position = player.transform.position + player.transform.forward * 6 + offset;
+        pauseMenuUI.transform.rotation = player.transform.rotation;
+    }
+
+    void ReturnMenuPosition()
+    {
+        pauseMenuUI.transform.position = returnMenuPosition;
     }
 
     //shuts down voice recognition when the game closes

@@ -8,6 +8,8 @@ TagManager:
   - Prox
   - Ground
   - StartPoint
+  - Blindfold
+  - ReturnMenuPosition
   layers:
   - Default
   - TransparentFX
