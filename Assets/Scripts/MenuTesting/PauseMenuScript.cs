@@ -71,7 +71,7 @@ public class PauseMenuScript : MonoBehaviour
 
         //actually move the player
         pMover.transform.position = startPoint.transform.position;
-
+        pMover.playerRgbody.velocity = Vector3.zero;
         //resume the game
         Resume();
 
@@ -88,8 +88,8 @@ public class PauseMenuScript : MonoBehaviour
     
     void SetMenuPosition()
     {
-        pauseMenuUI.transform.position = playerReference.position + offset;
-        pauseMenuUI.transform.rotation = playerReference.rotation;
+        pauseMenuUI.transform.position = pMover.transform.position + pMover.transform.forward * 5 + offset;
+        pauseMenuUI.transform.rotation = pMover.transform.rotation;
     }
 
     void delayedPauseReset()

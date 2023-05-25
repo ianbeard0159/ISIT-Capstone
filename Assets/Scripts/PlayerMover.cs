@@ -118,7 +118,7 @@ public class PlayerMover : MonoBehaviour, IMover
         var boardRotation = Quaternion.LookRotation(newRotation, Vector3.up);
         var rot = transform.rotation;
         //Controls rotation, using Lerp to rotate over time, given the object to rotate (self), final rotation, and speed
-        rot = Quaternion.Lerp(transform.rotation, boardRotation, boardStat.boardRotSpeed * timeCount);
+        rot = Quaternion.Lerp(transform.rotation, boardRotation, boardStat.boardRotSpeed * Time.deltaTime);
         transform.rotation = rot;
 
         Vector3 gravity = Physics.gravity; // + new Vector3(0,-50f,0);
@@ -173,9 +173,8 @@ public class PlayerMover : MonoBehaviour, IMover
             }
             if (!_closeToGround)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed / 10) * timeCount);
+                transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed / 10) * Time.deltaTime);
             }
-            timeCount = timeCount + Time.deltaTime;
         }
 
         //fasted speed

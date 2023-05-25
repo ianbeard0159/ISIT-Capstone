@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using System.Linq;
 using UnityEngine.InputSystem;
+using static PauseMenuScript;
 
 public class Tricks : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Tricks : MonoBehaviour
     
     //Voice comands
     //keywords are the phrases the game will be looking for
-    public string[] keywords = new string[] {"go", "unstuck","resume","stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
+    public string[] keywords = new string[] {"reset", "go", "unstuck","resume","stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
     public ConfidenceLevel confidence = ConfidenceLevel.Medium;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
@@ -32,6 +33,7 @@ public class Tricks : MonoBehaviour
     private bool isGamePaused = false;
     private bool shouldBePaused = false;
     Vector3 returnMenuPosition;
+    public PauseMenuScript pauseMenu;
 
 
     //Inputs for the tricks, button triggers are made in the unity inspector
@@ -95,6 +97,7 @@ public class Tricks : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         returnMenuPosition = GameObject.FindGameObjectWithTag("ReturnMenuPosition").transform.position;
         animator.enabled = false;
+        pauseMenu = GameObject.Find("PauseMenuContainer").GetComponent<PauseMenuScript>();
 
         //checks animation states, used for seeing if animation is finish
         //animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -314,6 +317,41 @@ public class Tricks : MonoBehaviour
                 pMover.inTrick = false;
             }
         }
+        switch (word){
+            case "pause":
+            case "stop":
+                Debug.Log("CALLING STOP!");
+                if (shouldBePaused)
+                    shouldBePaused = false;
+                else
+                    shouldBePaused = true;
+
+                Debug.Log("SHOULD BE PAUSED : " + shouldBePaused);
+                word = "";
+                break;
+            case "resume":
+            case "go":
+                Debug.Log("UNPAUSE!");
+                shouldBePaused = false;
+                word = "";
+                break;
+            case "unstuck":
+                Vector3 temp = transform.position;
+                temp.y += 10;
+                player.transform.position = temp;
+                word = "";
+                break;
+            case "jump":
+                pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
+                word = "";
+                break;
+            default:
+                break;
+        }
+        
+        
+
+        /*
         if (word == "pause" || word == "stop")
         {
             Debug.Log("CALLING STOP!");
@@ -344,6 +382,21 @@ public class Tricks : MonoBehaviour
             word = "";
         }
 
+        */
+
+        if (unstuck.triggered)
+        {
+            Vector3 temp = transform.position;
+            temp.y += 10;
+            player.transform.position = temp;
+            word = "";
+        }
+        else if (jumpAction.triggered)
+        {
+            pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
+            word = "";
+        }
+
         if (shouldBePaused && !isGamePaused)
         {
             Pause();
@@ -353,13 +406,25 @@ public class Tricks : MonoBehaviour
         {
             Resume();
         }
+        if (isGamePaused)
+        {
+            if (word == "reset")
+            {
+                pauseMenu.TpToStartPoint();
+                word = "";
+            }
+        }
+        if (pMover._onGround)
+        {
+            word = "";
+        }
     }
 
     public void Resume()
     {
         //make the time sacle change over time
-        //pauseMenuUI.SetActive(false);
-        ReturnMenuPosition();
+        pauseMenuUI.SetActive(false);
+        //ReturnMenuPosition();
         Time.timeScale = 1f;
         isGamePaused = false;
         Debug.Log("Resume");
@@ -367,7 +432,7 @@ public class Tricks : MonoBehaviour
 
     void Pause()
     {
-        //pauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(true);
         
         isGamePaused = true;
         Debug.Log(isGamePaused);
@@ -378,7 +443,7 @@ public class Tricks : MonoBehaviour
 
     void SetMenuPosition()
     {
-        pauseMenuUI.transform.position = player.transform.position + player.transform.forward * 6 + offset;
+        pauseMenuUI.transform.position = player.transform.position + player.transform.forward * 5 + offset;
         pauseMenuUI.transform.rotation = player.transform.rotation;
     }
 
