@@ -65,27 +65,35 @@ public class EndZone : MonoBehaviour
             }
             if (Time.timeScale <= slowdownPercent)
             {
-                //Corutine?
-                Debug.Log("Done slowing down");
-                if (timerOne > 4)
-                {
-                    animator.SetBool("isActive", true);
-                    if (timerTwo > 2)
-                    {
-                        in_collider.transform.position = startPoint.transform.position;
-                        animator.SetBool("isActive", false);
-                        if (timerThree > 2)
-                        {
-                            Time.timeScale = 1;
-                            pMover._inGame = true;
-                            pMover._onGround = true;
-                            pMover._closeToGround = true;
-                            activate = false;
-                            pRB.velocity = Vector3.zero;
-                            pMover.runTimer.Restart();                            
-                        }
-                    }
-                }
+                Time.timeScale = 1;
+                pMover._inGame = true;
+                pMover._onGround = true;
+                pMover._closeToGround = true;
+                activate = false;
+                in_collider.transform.position = startPoint.transform.position;
+                pRB.velocity = Vector3.zero;
+                pMover.runTimer.Restart();
+                ////Corutine?
+                //Debug.Log("Done slowing down");
+                //if (timerOne > 4)
+                //{
+                //    animator.SetBool("isActive", true);
+                //    if (timerTwo > 2)
+                //    {
+                //        in_collider.transform.position = startPoint.transform.position;
+                //        animator.SetBool("isActive", false);
+                //        if (timerThree > 2)
+                //        {
+                //            Time.timeScale = 1;
+                //            pMover._inGame = true;
+                //            pMover._onGround = true;
+                //            pMover._closeToGround = true;
+                //            activate = false;
+                //            pRB.velocity = Vector3.zero;
+                //            pMover.runTimer.Restart();                            
+                //        }
+                //    }
+                //}
 
             }
         }
@@ -98,5 +106,10 @@ public class EndZone : MonoBehaviour
             in_collider = other;
             activate = true;
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        activate = false;
     }
 }

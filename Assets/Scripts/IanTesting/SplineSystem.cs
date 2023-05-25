@@ -59,7 +59,6 @@ namespace Spline
         void FixedUpdate()
         {
             //check if pauseReset has been flipped; if so, toss out all movers
-            //currently bugged and player will have 0 control when this is done
             if (Tricks.pauseReset == true)
             {
                 TossMovers();
@@ -229,7 +228,7 @@ namespace Spline
                 engagedMovers[i].owner.flag_engaged = false;
                 engagedMovers.Remove(engagedMovers[i]);
             }
-            UnityEngine.Debug.Log("Movers tossed");
+            //UnityEngine.Debug.Log("Movers tossed");
         }
     }   
 }

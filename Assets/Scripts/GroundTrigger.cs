@@ -26,6 +26,14 @@ public class GroundTrigger : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision in_collider)
+    {
+        if (in_collider.gameObject.CompareTag("Ground"))
+        {
+            player._onGround = true;
+        }
+    }
+
     void OnTriggerExit(Collider in_collider)
     {
         if (in_collider.gameObject.CompareTag("Ground"))

@@ -9,9 +9,9 @@ public class Slowdown : MonoBehaviour
     float timer;
 
     [SerializeField]
-    float delay = 1;
-    [SerializeField] float slowdownPercent = 0.25f;
-    [SerializeField] float slowdownStep = 0.01f;
+    float delay = 4;
+    [SerializeField] float slowdownPercent = 0.10f;
+    [SerializeField] float slowdownStep = 0.10f;
     float startTime = 1;
 
     private enum SlowdownState {
