@@ -23,6 +23,7 @@ public class Flag : MonoBehaviour
 
     void OnTriggerEnter(Collider in_collider)
     {
+        source.Play();
         if (in_collider.gameObject.CompareTag("Player"))
         {
             player.markerScore += 100;

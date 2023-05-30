@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -75,5 +76,16 @@ public class MenuManager : MonoBehaviour
             var colliderItem = collidersObj[index];
             colliderItem.enabled = which;
         }
+    }
+
+    public enum Scene
+    {
+        FinalScene,
+        StartingScene,
+    }
+
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
