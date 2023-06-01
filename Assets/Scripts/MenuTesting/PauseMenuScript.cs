@@ -1,19 +1,32 @@
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenuScript : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject Leaderboard;
+    public TMP_Text TimeText;
     public Transform playerReference;
     public Vector3 offset;
     public GameObject startPoint;
     public PlayerMover pMover;
     private bool isGamePaused = false;
     private bool shouldBePaused = false;
-    //private float gameSpeed = 1.0f;
+
+    public Stopwatch runTimer;
+
+    void Start()
+    {
+        TimeText.text = "";
+        runTimer = new Stopwatch();
+        runTimer.Start();
+    }
 
     private void Update()
     {
+        TimeText.text = runTimer.Elapsed.ToString();
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             TpToStartPoint();
@@ -40,9 +53,12 @@ public class PauseMenuScript : MonoBehaviour
     //if the game is paused but should be paused
     public void Resume()
     {
+        runTimer.Start();
         //make the time scale change over time
         pauseMenuUI.SetActive(false);
+        Leaderboard.SetActive(false);
         Time.timeScale = 1f;
+        Tricks.hoverBuffer = 1f;
         isGamePaused = false;
 
         //added the below line, allowing pause to be done through the pause menu "Resume" button
@@ -53,10 +69,15 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Pause()
     {
+        runTimer.Stop();
         pauseMenuUI.SetActive(true);
+        Leaderboard.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
         SetMenuPosition();
+
+        //show leaderboard on pause for now
+        SetLeaderboardPosition();
         UnityEngine.Debug.Log("Pause");
     }
 
@@ -73,23 +94,26 @@ public class PauseMenuScript : MonoBehaviour
         pMover.transform.position = startPoint.transform.position;
         pMover.playerRgbody.velocity = Vector3.zero;
         //resume the game
+        runTimer.Reset();
         Resume();
+        
 
         //now, toggle pauseReset back to false AFTER DELAYING ONE SECOND
         //this prevents the user from being teleported back on immediately
         Invoke("delayedPauseReset", 1);
     }
 
-    //possible timescale adjustment method?
-    //public void TimescaleAdjust(float x)
-    //{
-    //    Time.timeScale = x;
-    //}
     
     void SetMenuPosition()
     {
         pauseMenuUI.transform.position = pMover.transform.position + pMover.transform.forward * 5 + offset;
         pauseMenuUI.transform.rotation = pMover.transform.rotation;
+    }
+
+    void SetLeaderboardPosition()
+    {
+        Leaderboard.transform.position = pMover.transform.position + pMover.transform.forward * 5 + offset + pMover.transform.right * 7;
+        Leaderboard.transform.rotation = pMover.transform.rotation;
     }
 
     void delayedPauseReset()
