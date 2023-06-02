@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using System.Linq;
 using UnityEngine.InputSystem;
-using static PauseMenuScript;
 using UnityEngine.SceneManagement;
 
 public class Tricks : MonoBehaviour
 {
     public MenuManager Menu;
+    public MenuManager pMenu;
     public Scene scene;
+
 
     public bool initBool = false;
 
@@ -38,18 +39,15 @@ public class Tricks : MonoBehaviour
         "Play", "Stages", "Stats", "Back", "Video", "Difficulty",
         "Accessibility", "Audio", "one", "two", "three", "four",
         "Tutorial", "Main Menu", "Menu" };
-public ConfidenceLevel confidence = ConfidenceLevel.Low;
+    public ConfidenceLevel confidence = ConfidenceLevel.Low;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
     protected string word = ""; //what the player has said
 
-    public GameObject pauseMenuUI;
     public Transform playerReference;
     public Vector3 offset;
-    private bool isGamePaused = false;
-    private bool shouldBePaused = false;
-    Vector3 returnMenuPosition;
-    public PauseMenuScript pauseMenu;
+    public bool isGamePaused = false;
+    public PauseMenuScript pauseScript;
 
 
     //Inputs for the tricks, button triggers are made in the unity inspector
@@ -65,7 +63,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
     public InputAction unstuck;
 
     //boolean to toss the player off of a spline when reset from pause menu
-    public static bool pauseReset;
+    public static bool pauseReset ;
     //int to manage time to hover
     public static int hoverTime;
 
@@ -101,22 +99,24 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
 
     public void init()
     {
-        Scene scene = SceneManager.GetActiveScene();
+        scene = SceneManager.GetActiveScene();
         if (scene.name == "StartingScene")
         {
             Menu = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();    
         }
         if (scene.name == "FinalScene")
         {
-            returnMenuPosition = GameObject.FindGameObjectWithTag("ReturnMenuPosition").transform.position;
+            pMenu = GameObject.FindGameObjectWithTag("pauseMenuUI").GetComponent<MenuManager>();
         }
+
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player");
         pMover = player.GetComponent<PlayerMover>();
         pRB = player.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         animator.enabled = false;
-        
+        LoadKeywords();
+
         initBool = true;
     }
 
@@ -127,8 +127,11 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
         //set pausereset to false
         pauseReset = false;
         hoverTime = 0;
-        hoverBuffer = 0f;
+        hoverBuffer = 0f;        
+    }
 
+    public void LoadKeywords()
+    {
         //fills the voice conrol recognizer with the keyword list
         if (keywords != null)
         {
@@ -140,7 +143,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
 
         //logs all the avalibe microphones
         foreach (var device in Microphone.devices)
-        { 
+        {
             Debug.Log("Name: " + device);
         }
     }
@@ -166,8 +169,6 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
         //logs the last trick used
         var lastTrick = "";
         if (scene.name == "StartingScene"){
-
-        
             if (Menu.context == "Panel_Main")
             {
                 if (word == "options")
@@ -175,7 +176,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                     Menu.SetCurrentFromVoice("Panel_Options");
                     word = "";
                 }
-                if (word == "Boards")
+                if (word == "boards")
                 {
                     Menu.SetCurrentFromVoice("Panel_Boards");
                     word = "";
@@ -183,6 +184,16 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                 if (word == "Stages")
                 {
                     Menu.SetCurrentFromVoice("Panel_Stages");
+                    word = "";
+                }
+                if (word == "play")
+                {
+                    Menu.LoadScene("FinalScene");
+                    word = "";
+                }
+                if (word == "stats")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Stats");
                     word = "";
                 }
             }
@@ -242,7 +253,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                     word = "";
                 }
             }
-            if (Menu.context == "Panel_Stage")
+            if (Menu.context == "Panel_Stages")
             {
                 if (word == "Back")
                 {
@@ -280,6 +291,50 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                 if (word == "Back")
                 {
                     Menu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
+            }
+        }
+        if (isGamePaused)
+        {
+            if (pMenu.context == "Panel_Main")
+            {
+                if (word == "Menu" || word == "Main Menu")
+                {
+                    pauseScript.LoadMenu();
+                    word = "";
+                }
+                if (word == "options")
+                {
+                    pMenu.SetCurrentFromVoice("Panel_Options");
+                    word = "";
+                }
+            }
+            if (pMenu.context == "Panel_Options")
+            {
+                if (word == "Back")
+                {
+                    pMenu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
+                if (word == "Video")
+                {
+                    Debug.Log("VIDEO SETTINGS");
+                    word = "";
+                }
+                if (word == "Difficulty")
+                {
+                    Debug.Log("DIFFICULTY SETTINGS");
+                    word = "";
+                }
+                if (word == "Accessibility")
+                {
+                    Debug.Log("ACCESSIBILITY SETTINGS");
+                    word = "";
+                }
+                if (word == "Audio")
+                {
+                    Debug.Log("AUDIO SETTINGS");
                     word = "";
                 }
             }
@@ -426,29 +481,11 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                         word = "";
                     }
                 }
-                if (pMover._onGround)
-                {
-                    //animator.enabled = false;
-                    pMover.playerRgbody.AddForce(pMover.board.transform.forward * pMover.potTrickScore / 100, ForceMode.Impulse);
-                    pMover.actTrickScore += pMover.potTrickScore;
-                    pMover.potTrickScore = 0;
-                    pMover.inTrick = false;
-                    lastTrick = "";
-                    word = "";
-                }
-            }
+                
+            }  
             else
             {
-                if (pMover._onGround)
-                {
-                    //animator.enabled = false;
-                    pMover.playerRgbody.AddForce(pMover.board.transform.forward * pMover.potTrickScore / 100, ForceMode.Impulse);
-                    pMover.actTrickScore += pMover.potTrickScore;
-                    pMover.potTrickScore = 0;
-                    pMover.inTrick = false;
-                    lastTrick = "";
-                    word = "";
-                }
+                
                 if (pMover._onGround)
                 {
                     //crash
@@ -466,22 +503,35 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                 pMover.inTrick = false;
             }
         }
+        if (pMover._onGround)
+        {
+            //animator.enabled = false;
+            pMover.playerRgbody.AddForce(pMover.board.transform.forward * pMover.potTrickScore / 100, ForceMode.Impulse);
+            pMover.actTrickScore += pMover.potTrickScore;
+            pMover.potTrickScore = 0;
+            pMover.inTrick = false;
+            lastTrick = "";
+            word = "";
+        }
         switch (word){
             case "pause":
             case "stop":
                 Debug.Log("CALLING STOP!");
-                if (shouldBePaused)
-                    shouldBePaused = false;
-                else
-                    shouldBePaused = true;
-
-                Debug.Log("SHOULD BE PAUSED : " + shouldBePaused);
+                if (!isGamePaused)
+                {
+                    isGamePaused = true;
+                    pauseScript.Pause();
+                }
                 word = "";
                 break;
             case "resume":
             case "go":
                 Debug.Log("UNPAUSE!");
-                shouldBePaused = false;
+                if (isGamePaused)
+                {
+                    pauseScript.Resume();
+                    isGamePaused = false;
+                }                
                 word = "";
                 break;
             case "unstuck":
@@ -496,43 +546,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
                 break;
             default:
                 break;
-        }
-        
-        
-
-        /*
-        if (word == "pause" || word == "stop")
-        {
-            Debug.Log("CALLING STOP!");
-            if (shouldBePaused)
-                shouldBePaused = false;
-            else
-                shouldBePaused = true;
-
-            Debug.Log("SHOULD BE PAUSED : " + shouldBePaused);
-            word = "";
-        }
-        if (word == "resume" || word == "go")
-        {
-            Debug.Log("UNPAUSE!");
-            shouldBePaused = false;
-            word = "";
-        }
-        if (word == "unstuck" || unstuck.triggered)
-        {
-            Vector3 temp = transform.position;
-            temp.y += 10;
-            player.transform.position = temp;
-            word = "";
-        }
-        if (word == "jump" || jumpAction.triggered)
-        {
-            pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
-            word = "";
-        }
-
-        */
-
+        }      
         if (unstuck.triggered)
         {
             Vector3 temp = transform.position;
@@ -545,21 +559,13 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
             pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
             word = "";
         }
-
-        if (shouldBePaused && !isGamePaused)
-        {
-            Pause();
-
-        }
-        else if (!shouldBePaused && isGamePaused)
-        {
-            Resume();
-        }
         if (isGamePaused)
         {
             if (word == "reset")
             {
-                pauseMenu.TpToStartPoint();
+                pauseScript.TpToStartPoint();
+                pMover.StatReset();
+                isGamePaused = false;
                 word = "";
             }
         }
@@ -569,40 +575,18 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
         }
     }
 
-    public void Resume()
-    {
-        //make the time sacle change over time
-        pauseMenuUI.SetActive(false);
-        //ReturnMenuPosition();
-        Time.timeScale = 1f;
-        isGamePaused = false;
-        Debug.Log("Resume");
-    }
-
-    void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        
-        isGamePaused = true;
-        Debug.Log(isGamePaused);
-        SetMenuPosition();
-        Time.timeScale = 0f;
-        Debug.Log("Pause");
-    }
-
-    void SetMenuPosition()
-    {
-        pauseMenuUI.transform.position = player.transform.position + player.transform.forward * 5 + offset;
-        pauseMenuUI.transform.rotation = player.transform.rotation;
-    }
-
-    void ReturnMenuPosition()
-    {
-        pauseMenuUI.transform.position = returnMenuPosition;
-    }
-
     //shuts down voice recognition when the game closes
     private void OnApplicationQuit()
+    {
+        KillVoice();
+    }
+
+    private void OnDestroy()
+    {
+        KillVoice();
+    }
+
+    public void KillVoice()
     {
         if (recognizer != null && recognizer.IsRunning)
         {

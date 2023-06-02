@@ -240,6 +240,11 @@ PrefabInstance:
       propertyPath: keywords.Array.data[22]
       value: tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 4832606036110871707, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.36144
+      objectReference: {fileID: 0}
     - target: {fileID: 6204264836613629189, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: m_RootOrder
@@ -6227,7 +6232,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79d3b1339c5e1da4bb5dcd5a1268f44c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.238
+  m_Volume: 0.158
   m_Pitch: 1
   Loop: 0
   Mute: 0

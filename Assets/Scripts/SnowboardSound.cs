@@ -8,17 +8,31 @@ public class SnowboardSound : MonoBehaviour
     public AudioClip clip;
 
     public PlayerMover player;
+    public Tricks pTricks;
+
+    public bool initBool;
+
+    public void init()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
+        pTricks = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Tricks>();
+        initBool = true;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
+        init();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player._onGround)
+        if (!initBool)
+        {
+            init();
+        }
+        if (player._onGround || !pTricks.isGamePaused)
         {
             if (!source.isPlaying)
             {
