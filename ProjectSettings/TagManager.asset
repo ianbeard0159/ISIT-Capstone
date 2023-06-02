@@ -10,6 +10,7 @@ TagManager:
   - StartPoint
   - Blindfold
   - ReturnMenuPosition
+  - Menu
   layers:
   - Default
   - TransparentFX

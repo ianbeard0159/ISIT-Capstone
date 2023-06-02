@@ -9,6 +9,7 @@ using System.Linq;
 
 public class PlayerMover : MonoBehaviour, IMover
 {
+    public bool initBool = false;
     CharacterController characterController;
     public Rigidbody playerRgbody;
     public Board boardStat;
@@ -19,8 +20,8 @@ public class PlayerMover : MonoBehaviour, IMover
 
     //Flags to track player postion
     private bool _inFeature;
-    public bool _onGround;
-    public bool _closeToGround;
+    public bool _onGround = true;
+    public bool _closeToGround = true;
     public float distanceToGround;
     public float onGroundOffset;
     public float bufferCheckDistance = 0.001f;
@@ -54,6 +55,7 @@ public class PlayerMover : MonoBehaviour, IMover
     public Stopwatch runTimer; //start on menu button press
     public double runTime; //at endzone, stop timer
     public Stopwatch airTimer;
+    public float highestAir;
 
     public bool inTrick;
 
@@ -72,11 +74,6 @@ public class PlayerMover : MonoBehaviour, IMover
     // Start is called before the first frame update
     void Start()
     {
-        
-        characterController = GetComponent<CharacterController>();
-        playerRgbody = GetComponent<Rigidbody>();
-        board = GameObject.FindGameObjectWithTag("Board");
-        boardStat = board.GetComponent<Board>();
         runTimer = new Stopwatch();
         airTimer = new Stopwatch();
 
@@ -84,9 +81,22 @@ public class PlayerMover : MonoBehaviour, IMover
         //_inGame = true;
     }
 
+    public void init()
+    {
+        characterController = GetComponent<CharacterController>();
+        playerRgbody = GetComponent<Rigidbody>();
+        board = GameObject.FindGameObjectWithTag("Board");
+        boardStat = board.GetComponent<Board>();
+        initBool = true;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!initBool)
+        {
+            init();  
+        }
         //Automatic unstuck
         //if (playerRgbody.velocity.magnitude < 0.01)
         //{
@@ -107,6 +117,10 @@ public class PlayerMover : MonoBehaviour, IMover
             {
                 _onGround = false;
                 UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
+            if (highestAir < distanceToGround)
+            {
+                highestAir = distanceToGround;
+            }
             }
             if (distanceToGround < 5)
             {

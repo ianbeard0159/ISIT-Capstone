@@ -5,9 +5,15 @@ using UnityEngine.Windows.Speech;
 using System.Linq;
 using UnityEngine.InputSystem;
 using static PauseMenuScript;
+using UnityEngine.SceneManagement;
 
 public class Tricks : MonoBehaviour
 {
+    public MenuManager Menu;
+    public Scene scene;
+
+    public bool initBool = false;
+
     //Animation Controller
     private Animator animator;
     AnimatorStateInfo animStateInfo;
@@ -18,11 +24,18 @@ public class Tricks : MonoBehaviour
     GameObject player;
     private PlayerMover pMover;
     Rigidbody pRB;
-    
+
     //Voice comands
     //keywords are the phrases the game will be looking for
-    public string[] keywords = new string[] {"reset", "go", "unstuck","resume","stop", "pause", "negative one eighty", "one eighty", "Backflip", "Backslide","Frontflip", "Frontslide", "seven twenty", "three sixty"};
-    public ConfidenceLevel confidence = ConfidenceLevel.Medium;
+    public string[] keywords = new string[] {
+        "reset", "go", "unstuck","resume","stop",
+        "pause", "negative one eighty", "one eighty",
+        "Backflip", "Backslide","Frontflip", "Frontslide",
+        "seven twenty", "three sixty", "Options", "Boards",
+        "Play", "Stages", "Stats", "Back", "Video", "Difficulty",
+        "Accessibility", "Audio", "one", "two", "three", "four",
+        "Tutorial", "Main Menu", "Menu" };
+public ConfidenceLevel confidence = ConfidenceLevel.Low;
     protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
     protected string word = ""; //what the player has said
@@ -83,24 +96,34 @@ public class Tricks : MonoBehaviour
         unstuck.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void init()
     {
-        //set pausereset to false
-        pauseReset = false;
-        hoverTime = 0;
-
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "StartingScene")
+        {
+            Menu = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();    
+        }
+        if (scene.name == "FinalScene")
+        {
+            returnMenuPosition = GameObject.FindGameObjectWithTag("ReturnMenuPosition").transform.position;
+        }
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player");
         pMover = player.GetComponent<PlayerMover>();
         pRB = player.GetComponent<Rigidbody>();
-        animator = GetComponentInChildren<Animator>();
-        returnMenuPosition = GameObject.FindGameObjectWithTag("ReturnMenuPosition").transform.position;
+        animator = GetComponent<Animator>();
         animator.enabled = false;
-        pauseMenu = GameObject.Find("PauseMenuContainer").GetComponent<PauseMenuScript>();
+        
+        initBool = true;
+    }
 
-        //checks animation states, used for seeing if animation is finish
-        //animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+    // Start is called before the first frame update
+    void Start()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        //set pausereset to false
+        pauseReset = false;
+        hoverTime = 0;
 
         //fills the voice conrol recognizer with the keyword list
         if (keywords != null)
@@ -128,17 +151,135 @@ public class Tricks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!initBool)
+        {        
+            init();
+        }
+        if (!pMover.initBool)
+        {
+            pMover.init();
+        }
         //logs the last trick used
         var lastTrick = "";
-        //word = "";
-        NTime = animStateInfo.normalizedTime; //grabs the time the animation plays, should max out at 1 (second)
-        if (animationFinished)
+        if (Menu.context == "Panel_Main")
         {
-            //if animation is finished, player should not be considered in a trick
-           // player.inTrick = false;
+            if (word == "options")
+            {
+                Menu.SetCurrentFromVoice("Panel_Options");
+                word = "";
+            }
+            if (word == "Boards")
+            {
+                Menu.SetCurrentFromVoice("Panel_Boards");
+                word = "";
+            }
+            if (word == "Stages")
+            {
+                Menu.SetCurrentFromVoice("Panel_Stages");
+                word = "";
+            }
         }
-        //if the player is not on the ground, or in a trick,
-        //they can call out a trick name or 'gamepad' input
+        if (Menu.context == "Panel_Options")
+        {
+            if (word == "Back")
+            {
+                Menu.SetCurrentFromVoice("Panel_Main");
+                word = "";
+            }
+            if (word == "Video")
+            {
+                Debug.Log("VIDEO SETTINGS");
+                word = "";
+            }
+            if (word == "Difficulty")
+            {
+                Debug.Log("DIFFICULTY SETTINGS");
+                word = "";
+            }
+            if (word == "Accessibility")
+            {
+                Debug.Log("ACCESSIBILITY SETTINGS");
+                word = "";
+            }
+            if (word == "Audio")
+            {
+                Debug.Log("AUDIO SETTINGS");
+                word = "";
+            }
+        }
+        if (Menu.context == "Panel_Boards")
+        {
+            if (word == "Back")
+            {
+                Menu.SetCurrentFromVoice("Panel_Main");
+                word = "";
+            }
+            if (word == "One")
+            {
+                Debug.Log("BOARD ONE");
+                word = "";
+            }
+            if (word == "Two")
+            {
+                Debug.Log("BOARD TWO");
+                word = "";
+            }
+            if (word == "Three")
+            {
+                Debug.Log("BOARD THREE");
+                word = "";
+            }
+            if (word == "Four")
+            {
+                Debug.Log("BOARD FOUR");
+                word = "";
+            }
+        }
+        if (Menu.context == "Panel_Stage")
+        {
+            if (word == "Back")
+            {
+                Menu.SetCurrentFromVoice("Panel_Main");
+                word = "";
+            }
+            if (word == "One")
+            {
+                Debug.Log("STAGE ONE");
+                word = "";
+            }
+            if (word == "Two")
+            {
+                Debug.Log("STAGE TWO");
+                word = "";
+            }
+            if (word == "Three")
+            {
+                Debug.Log("STAGE THREE");
+                word = "";
+            }
+            if (word == "Four")
+            {
+                Debug.Log("STAGE FOUR");
+                word = "";
+            }
+            if (word == "Tutorial")
+            {
+                Debug.Log("STAGE TUTORIAL");
+                word = "";
+            }
+        }
+        if (Menu.context == "Panel_Stats")
+        {
+            if (word == "Back")
+            {
+                Menu.SetCurrentFromVoice("Panel_Main");
+                word = "";
+            }
+        }
+
+            //if the player is not on the ground, or in a trick,
+            //they can call out a trick name or 'gamepad' input
+            Debug.Log(pMover);
         if (!pMover._closeToGround)
         {
             animator.enabled = true;

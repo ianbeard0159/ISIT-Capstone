@@ -135,6 +135,111 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: confidence
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: unstuck.m_Id
+      value: 6de123db-0e72-4a30-a4a4-104c4aff8df2
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: unstuck.m_Name
+      value: Unstuck
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: jumpAction.m_Id
+      value: 2b7e7e99-7edb-48d1-8ef8-292c771dc522
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: jumpAction.m_Name
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[8]
+      value: options
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[9]
+      value: boards
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[10]
+      value: play
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[11]
+      value: Stages
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[12]
+      value: stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[13]
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[14]
+      value: video
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[15]
+      value: difficulty
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[16]
+      value: accessibility
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[17]
+      value: audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[18]
+      value: one
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[19]
+      value: two
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[20]
+      value: three
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[21]
+      value: four
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[22]
+      value: tutorial
+      objectReference: {fileID: 0}
     - target: {fileID: 6204264836613629189, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: m_RootOrder
@@ -189,6 +294,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: confidence
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: unstuck.m_Name
+      value: Unstuck
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: jumpAction.m_Name
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[8]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e91a72b5a9ca8de4c8634343276758ad, type: 3}
@@ -417,7 +547,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49089266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1823912, y: 0.31, z: -89.05032}
+  m_LocalPosition: {x: 0.1, y: 0.31, z: -89.05032}
   m_LocalScale: {x: 4.032435, y: 0.99116, z: 3.8225076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5217,7 +5347,7 @@ GameObject:
   - component: {fileID: 1125842803}
   m_Layer: 5
   m_Name: MenuCanvas
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5254,6 +5384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPanel: {fileID: 650179173}
+  context: Panel_Main
 --- !u!114 &1125842799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5735,7 +5866,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79d3b1339c5e1da4bb5dcd5a1268f44c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.238
   m_Pitch: 1
   Loop: 0
   Mute: 0

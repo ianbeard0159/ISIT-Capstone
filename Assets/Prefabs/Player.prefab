@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb31d4637e21187448b00e6fbfc04359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Menu: {fileID: 0}
+  scene:
+    m_Handle: 0
+  initBool: 0
   NTime: 0
   keywords:
   - negative one eighty
@@ -62,6 +66,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 0}
   playerReference: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  pauseMenu: {fileID: 0}
   negativeOneEightyAction:
     m_Name: Negative One Eighty
     m_Type: 0
@@ -202,7 +207,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 19518cdd-cef7-44c3-893a-d48b97bd1d42
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -211,7 +216,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 74c54e0a-8872-474a-876d-520bee826b6d
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -336,11 +341,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bede02b16d2973a48a7b31e4a5e8e75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initBool: 0
   playerRgbody: {fileID: 0}
   boardStat: {fileID: 0}
   _inGame: 0
+  _inMenu: 0
   _onGround: 0
   _closeToGround: 0
+  distanceToGround: 0
+  onGroundOffset: 0
+  bufferCheckDistance: 0.001
   board: {fileID: 0}
   jumpAction:
     m_Name: Jump
@@ -357,6 +367,7 @@ MonoBehaviour:
   highSpeed: 0
   airTime: 0
   runTime: 0
+  highestAir: 0
   inTrick: 0
 --- !u!95 &7977585256115404872
 Animator:
@@ -390,6 +401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb31d4637e21187448b00e6fbfc04359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Menu: {fileID: 0}
+  scene:
+    m_Handle: 0
+  initBool: 0
   NTime: 0
   keywords:
   - negative one eighty
@@ -405,6 +420,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 0}
   playerReference: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  pauseMenu: {fileID: 0}
   negativeOneEightyAction:
     m_Name: Negative One Eighty
     m_Type: 0
@@ -718,6 +734,7 @@ GameObject:
   - component: {fileID: 459196512773737536}
   - component: {fileID: 8164133934991147036}
   - component: {fileID: 601330951451168279}
+  - component: {fileID: 7031821073536282193}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1122,6 +1139,14 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!81 &7031821073536282193
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4420510260152455465}
+  m_Enabled: 1
 --- !u!1 &5263352064183483855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,8 +1388,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7984474271970208814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16999817, z: 1.0029984}
-  m_LocalScale: {x: 0.8, y: 0.1, z: 3}
+  m_LocalPosition: {x: 0, y: 0.16999817, z: 1.98}
+  m_LocalScale: {x: 38.9, y: 2.53375, z: 58.31}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1960815231549976080}
@@ -1377,7 +1402,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7984474271970208814}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 5333785434075496541, guid: deb566436ec4038499c1d7412c47805b, type: 3}
 --- !u!23 &6103021524763788693
 MeshRenderer:
   m_ObjectHideFlags: 0
