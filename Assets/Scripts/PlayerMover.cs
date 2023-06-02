@@ -47,8 +47,6 @@ public class PlayerMover : MonoBehaviour, IMover
         jumpAction.Disable();
     }
 
-    float timeCount = 0.0f;
-
     //Score
     public int actTrickScore;
     public int potTrickScore;
@@ -93,6 +91,9 @@ public class PlayerMover : MonoBehaviour, IMover
 
         //delete after menu intergration
         _inGame = true;
+
+        //start stopwatch
+        runTimer.Start();
     }
 
     // Update is called once per frame
@@ -131,12 +132,12 @@ public class PlayerMover : MonoBehaviour, IMover
             }
             else if (!_onGround)
             {
-                UnityEngine.Debug.Log("FALLING");
-                UnityEngine.Debug.Log("GRAVITY : " + gravity);
-                UnityEngine.Debug.Log("TIME : " + timeCount);
+                //UnityEngine.Debug.Log("FALLING");
+                //UnityEngine.Debug.Log("GRAVITY : " + gravity);
+                //UnityEngine.Debug.Log("TIME : " + timeCount);
                 //UnityEngine.Debug.Log("Going : " + desiredVelocity);
                 //playerRgbody.velocity = desiredVelocity + gravity;
-                UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
+                //UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
                 //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
                 //playerRgbody.velocity = desiredVelocity;
                 playerRgbody.AddForce(gravity);
@@ -144,7 +145,7 @@ public class PlayerMover : MonoBehaviour, IMover
             }            
             else if (_onGround)
             {
-                UnityEngine.Debug.Log("ON GROUND");
+                //UnityEngine.Debug.Log("ON GROUND");
                 float speed = playerRgbody.velocity.magnitude;
 
                 playerRgbody.velocity = Vector3.zero;
@@ -156,10 +157,10 @@ public class PlayerMover : MonoBehaviour, IMover
                 if ((playerRgbody.velocity.magnitude < boardStat.boardMaxSpeed))
                 {                    
                     playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
-                    UnityEngine.Debug.Log("MOVING");
-                    UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
+                    //UnityEngine.Debug.Log("MOVING");
+                    //UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
                 }
-                UnityEngine.Debug.Log("Going : " + desiredVelocity);
+                //UnityEngine.Debug.Log("Going : " + desiredVelocity);
                 playerRgbody.velocity = desiredVelocity;
 
                 //UnityEngine.Debug.Log("speed : " + speed);

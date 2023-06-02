@@ -25,8 +25,11 @@ public class GazeManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(gazeRay, out hit, Mathf.Infinity))
         {
-            hit.transform.SendMessage("GazingUpon", SendMessageOptions.DontRequireReceiver);
-            lastGazedUpon = hit.transform.gameObject;
+            if (hit.transform.gameObject.tag == "PauseMenu")
+            {
+                hit.transform.SendMessage("GazingUpon", SendMessageOptions.DontRequireReceiver);
+                lastGazedUpon = hit.transform.gameObject;
+            }
         }
     }
 }

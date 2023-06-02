@@ -51,7 +51,7 @@ public class Tricks : MonoBehaviour
     //boolean to toss the player off of a spline when reset from pause menu
     public static bool pauseReset;
     //int to manage time to hover
-    public static int hoverTime;
+    public static float hoverBuffer;
 
     //When this script is enabled, all the actions are also enabled
     private void OnEnable()
@@ -88,7 +88,7 @@ public class Tricks : MonoBehaviour
     {
         //set pausereset to false
         pauseReset = false;
-        hoverTime = 0;
+        hoverBuffer = 0f;
 
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player");
