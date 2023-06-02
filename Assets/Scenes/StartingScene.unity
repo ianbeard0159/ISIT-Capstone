@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 81707055}
   - component: {fileID: 81707054}
   - component: {fileID: 81707053}
+  - component: {fileID: 81707058}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: PauseMenu
@@ -877,7 +878,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &81707054
 MonoBehaviour:
@@ -985,6 +986,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81707051}
   m_CullTransparentMesh: 1
+--- !u!95 &81707058
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81707051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &108259272
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1020,7 @@ GameObject:
   - component: {fileID: 108259276}
   - component: {fileID: 108259275}
   - component: {fileID: 108259274}
+  - component: {fileID: 108259279}
   m_Layer: 5
   m_Name: Board3Button
   m_TagString: PauseMenu
@@ -1050,7 +1072,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &108259276
 MonoBehaviour:
@@ -1134,6 +1156,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108259272}
   m_CullTransparentMesh: 1
+--- !u!95 &108259279
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108259272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &181854827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1571,7 @@ GameObject:
   - component: {fileID: 201114684}
   - component: {fileID: 201114683}
   - component: {fileID: 201114682}
+  - component: {fileID: 201114687}
   m_Layer: 5
   m_Name: Board2Button
   m_TagString: PauseMenu
@@ -1568,7 +1611,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &201114683
 MonoBehaviour:
@@ -1676,6 +1719,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201114680}
   m_CullTransparentMesh: 1
+--- !u!95 &201114687
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201114680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &277826069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +2023,7 @@ GameObject:
   - component: {fileID: 401650487}
   - component: {fileID: 401650486}
   - component: {fileID: 401650485}
+  - component: {fileID: 401650490}
   m_Layer: 5
   m_Name: Stage1Button
   m_TagString: PauseMenu
@@ -2011,7 +2075,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &401650487
 MonoBehaviour:
@@ -2095,6 +2159,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401650483}
   m_CullTransparentMesh: 1
+--- !u!95 &401650490
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401650483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &406947545
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2193,7 @@ GameObject:
   - component: {fileID: 406947549}
   - component: {fileID: 406947548}
   - component: {fileID: 406947547}
+  - component: {fileID: 406947552}
   m_Layer: 5
   m_Name: BoardsButton
   m_TagString: PauseMenu
@@ -2160,7 +2245,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &406947549
 MonoBehaviour:
@@ -2256,6 +2341,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406947545}
   m_CullTransparentMesh: 1
+--- !u!95 &406947552
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406947545}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &409659535
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2375,7 @@ GameObject:
   - component: {fileID: 409659539}
   - component: {fileID: 409659538}
   - component: {fileID: 409659537}
+  - component: {fileID: 409659542}
   m_Layer: 5
   m_Name: TutorialButton
   m_TagString: PauseMenu
@@ -2321,7 +2427,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &409659539
 MonoBehaviour:
@@ -2405,6 +2511,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409659535}
   m_CullTransparentMesh: 1
+--- !u!95 &409659542
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409659535}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &439934020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,6 +2545,7 @@ GameObject:
   - component: {fileID: 439934024}
   - component: {fileID: 439934023}
   - component: {fileID: 439934022}
+  - component: {fileID: 439934027}
   m_Layer: 5
   m_Name: Board1Button
   m_TagString: PauseMenu
@@ -2470,7 +2597,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &439934024
 MonoBehaviour:
@@ -2554,6 +2681,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439934020}
   m_CullTransparentMesh: 1
+--- !u!95 &439934027
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439934020}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &441503830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,6 +2715,7 @@ GameObject:
   - component: {fileID: 441503834}
   - component: {fileID: 441503833}
   - component: {fileID: 441503832}
+  - component: {fileID: 441503837}
   m_Layer: 5
   m_Name: StagesButton
   m_TagString: PauseMenu
@@ -2619,7 +2767,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &441503834
 MonoBehaviour:
@@ -2715,6 +2863,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441503830}
   m_CullTransparentMesh: 1
+--- !u!95 &441503837
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441503830}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &452415818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +3032,7 @@ GameObject:
   - component: {fileID: 488517961}
   - component: {fileID: 488517960}
   - component: {fileID: 488517959}
+  - component: {fileID: 488517964}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: PauseMenu
@@ -2903,7 +3072,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &488517960
 MonoBehaviour:
@@ -3011,6 +3180,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488517957}
   m_CullTransparentMesh: 1
+--- !u!95 &488517964
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488517957}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &498319280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4420510260152455465, guid: e91a72b5a9ca8de4c8634343276758ad,
@@ -3050,6 +3239,7 @@ GameObject:
   - component: {fileID: 506632178}
   - component: {fileID: 506632177}
   - component: {fileID: 506632176}
+  - component: {fileID: 506632181}
   m_Layer: 5
   m_Name: VideoButton
   m_TagString: PauseMenu
@@ -3101,7 +3291,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &506632178
 MonoBehaviour:
@@ -3185,6 +3375,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506632174}
   m_CullTransparentMesh: 1
+--- !u!95 &506632181
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506632174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &531728975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3431,6 +3641,7 @@ GameObject:
   - component: {fileID: 604824251}
   - component: {fileID: 604824250}
   - component: {fileID: 604824249}
+  - component: {fileID: 604824254}
   m_Layer: 5
   m_Name: AccessibilityButton
   m_TagString: PauseMenu
@@ -3482,7 +3693,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &604824251
 MonoBehaviour:
@@ -3566,6 +3777,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604824247}
   m_CullTransparentMesh: 1
+--- !u!95 &604824254
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604824247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &628091044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,6 +4196,7 @@ GameObject:
   - component: {fileID: 718205141}
   - component: {fileID: 718205140}
   - component: {fileID: 718205139}
+  - component: {fileID: 718205144}
   m_Layer: 5
   m_Name: StatsButton
   m_TagString: PauseMenu
@@ -4016,7 +4248,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &718205141
 MonoBehaviour:
@@ -4112,6 +4344,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718205137}
   m_CullTransparentMesh: 1
+--- !u!95 &718205144
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718205137}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &767051503
 GameObject:
   m_ObjectHideFlags: 0
@@ -4511,6 +4763,7 @@ GameObject:
   - component: {fileID: 962296531}
   - component: {fileID: 962296530}
   - component: {fileID: 962296529}
+  - component: {fileID: 962296534}
   m_Layer: 5
   m_Name: Board4Button
   m_TagString: PauseMenu
@@ -4562,7 +4815,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &962296531
 MonoBehaviour:
@@ -4646,6 +4899,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962296527}
   m_CullTransparentMesh: 1
+--- !u!95 &962296534
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962296527}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &979645060
 GameObject:
   m_ObjectHideFlags: 0
@@ -4660,6 +4933,7 @@ GameObject:
   - component: {fileID: 979645064}
   - component: {fileID: 979645063}
   - component: {fileID: 979645062}
+  - component: {fileID: 979645067}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: PauseMenu
@@ -4699,7 +4973,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &979645063
 MonoBehaviour:
@@ -4807,6 +5081,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979645060}
   m_CullTransparentMesh: 1
+--- !u!95 &979645067
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979645060}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1008992577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4821,6 +5115,7 @@ GameObject:
   - component: {fileID: 1008992581}
   - component: {fileID: 1008992580}
   - component: {fileID: 1008992579}
+  - component: {fileID: 1008992584}
   m_Layer: 5
   m_Name: Stage3Button
   m_TagString: PauseMenu
@@ -4872,7 +5167,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1008992581
 MonoBehaviour:
@@ -4956,6 +5251,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008992577}
   m_CullTransparentMesh: 1
+--- !u!95 &1008992584
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008992577}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1017588807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,6 +5285,7 @@ GameObject:
   - component: {fileID: 1017588811}
   - component: {fileID: 1017588810}
   - component: {fileID: 1017588809}
+  - component: {fileID: 1017588814}
   m_Layer: 5
   m_Name: AudioButton
   m_TagString: PauseMenu
@@ -5021,7 +5337,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1017588811
 MonoBehaviour:
@@ -5105,6 +5421,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017588807}
   m_CullTransparentMesh: 1
+--- !u!95 &1017588814
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017588807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1052482037
 GameObject:
   m_ObjectHideFlags: 0
@@ -6274,6 +6610,7 @@ GameObject:
   - component: {fileID: 1427569679}
   - component: {fileID: 1427569678}
   - component: {fileID: 1427569677}
+  - component: {fileID: 1427569682}
   m_Layer: 5
   m_Name: Stage2Button
   m_TagString: PauseMenu
@@ -6313,7 +6650,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1427569678
 MonoBehaviour:
@@ -6421,6 +6758,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427569675}
   m_CullTransparentMesh: 1
+--- !u!95 &1427569682
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427569675}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1438226908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,6 +6792,7 @@ GameObject:
   - component: {fileID: 1438226912}
   - component: {fileID: 1438226911}
   - component: {fileID: 1438226910}
+  - component: {fileID: 1438226915}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: PauseMenu
@@ -6474,7 +6832,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1438226911
 MonoBehaviour:
@@ -6582,6 +6940,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438226908}
   m_CullTransparentMesh: 1
+--- !u!95 &1438226915
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438226908}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1488437044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6596,6 +6974,7 @@ GameObject:
   - component: {fileID: 1488437049}
   - component: {fileID: 1488437048}
   - component: {fileID: 1488437047}
+  - component: {fileID: 1488437052}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: PauseMenu
@@ -6635,7 +7014,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1488437048
 MonoBehaviour:
@@ -6743,6 +7122,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488437044}
   m_CullTransparentMesh: 1
+--- !u!95 &1488437052
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488437044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1501618499
 GameObject:
   m_ObjectHideFlags: 0
@@ -7027,6 +7426,7 @@ GameObject:
   - component: {fileID: 1611705457}
   - component: {fileID: 1611705456}
   - component: {fileID: 1611705455}
+  - component: {fileID: 1611705460}
   m_Layer: 5
   m_Name: DifficultyButton
   m_TagString: PauseMenu
@@ -7066,7 +7466,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1611705456
 MonoBehaviour:
@@ -7174,6 +7574,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611705453}
   m_CullTransparentMesh: 1
+--- !u!95 &1611705460
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611705453}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1636147615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8113,6 +8533,7 @@ GameObject:
   - component: {fileID: 2021317796}
   - component: {fileID: 2021317795}
   - component: {fileID: 2021317794}
+  - component: {fileID: 2021317799}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: PauseMenu
@@ -8152,7 +8573,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 80, z: 20}
+  m_Size: {x: 180, y: 80, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2021317795
 MonoBehaviour:
@@ -8260,6 +8681,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021317792}
   m_CullTransparentMesh: 1
+--- !u!95 &2021317799
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021317792}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f88f9e026455481469e6764772d195cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2022214141
 GameObject:
   m_ObjectHideFlags: 0

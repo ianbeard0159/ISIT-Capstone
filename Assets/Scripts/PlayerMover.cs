@@ -116,7 +116,7 @@ public class PlayerMover : MonoBehaviour, IMover
             else
             {
                 _onGround = false;
-                UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
+                //UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
             if (highestAir < distanceToGround)
             {
                 highestAir = distanceToGround;

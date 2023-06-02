@@ -287,7 +287,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
 
             //if the player is not on the ground, or in a trick,
             //they can call out a trick name or 'gamepad' input
-            Debug.Log(pMover);
+            //Debug.Log(pMover);
         if (!pMover._closeToGround)
         {
             animator.enabled = true;
