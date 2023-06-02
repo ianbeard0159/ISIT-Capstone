@@ -25,6 +25,9 @@ public class Tricks : MonoBehaviour
     private PlayerMover pMover;
     Rigidbody pRB;
 
+    //int to manage time to hover
+    public static float hoverBuffer;
+
     //Voice comands
     //keywords are the phrases the game will be looking for
     public string[] keywords = new string[] {
@@ -124,6 +127,7 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
         //set pausereset to false
         pauseReset = false;
         hoverTime = 0;
+        hoverBuffer = 0f;
 
         //fills the voice conrol recognizer with the keyword list
         if (keywords != null)
