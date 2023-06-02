@@ -165,119 +165,123 @@ public ConfidenceLevel confidence = ConfidenceLevel.Low;
         }
         //logs the last trick used
         var lastTrick = "";
-        if (Menu.context == "Panel_Main")
-        {
-            if (word == "options")
+        if (scene.name == "StartingScene"){
+
+        
+            if (Menu.context == "Panel_Main")
             {
-                Menu.SetCurrentFromVoice("Panel_Options");
-                word = "";
+                if (word == "options")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Options");
+                    word = "";
+                }
+                if (word == "Boards")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Boards");
+                    word = "";
+                }
+                if (word == "Stages")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Stages");
+                    word = "";
+                }
             }
-            if (word == "Boards")
+            if (Menu.context == "Panel_Options")
             {
-                Menu.SetCurrentFromVoice("Panel_Boards");
-                word = "";
+                if (word == "Back")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
+                if (word == "Video")
+                {
+                    Debug.Log("VIDEO SETTINGS");
+                    word = "";
+                }
+                if (word == "Difficulty")
+                {
+                    Debug.Log("DIFFICULTY SETTINGS");
+                    word = "";
+                }
+                if (word == "Accessibility")
+                {
+                    Debug.Log("ACCESSIBILITY SETTINGS");
+                    word = "";
+                }
+                if (word == "Audio")
+                {
+                    Debug.Log("AUDIO SETTINGS");
+                    word = "";
+                }
             }
-            if (word == "Stages")
+            if (Menu.context == "Panel_Boards")
             {
-                Menu.SetCurrentFromVoice("Panel_Stages");
-                word = "";
+                if (word == "Back")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
+                if (word == "One")
+                {
+                    Debug.Log("BOARD ONE");
+                    word = "";
+                }
+                if (word == "Two")
+                {
+                    Debug.Log("BOARD TWO");
+                    word = "";
+                }
+                if (word == "Three")
+                {
+                    Debug.Log("BOARD THREE");
+                    word = "";
+                }
+                if (word == "Four")
+                {
+                    Debug.Log("BOARD FOUR");
+                    word = "";
+                }
             }
-        }
-        if (Menu.context == "Panel_Options")
-        {
-            if (word == "Back")
+            if (Menu.context == "Panel_Stage")
             {
-                Menu.SetCurrentFromVoice("Panel_Main");
-                word = "";
+                if (word == "Back")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
+                if (word == "One")
+                {
+                    Debug.Log("STAGE ONE");
+                    word = "";
+                }
+                if (word == "Two")
+                {
+                    Debug.Log("STAGE TWO");
+                    word = "";
+                }
+                if (word == "Three")
+                {
+                    Debug.Log("STAGE THREE");
+                    word = "";
+                }
+                if (word == "Four")
+                {
+                    Debug.Log("STAGE FOUR");
+                    word = "";
+                }
+                if (word == "Tutorial")
+                {
+                    Debug.Log("STAGE TUTORIAL");
+                    word = "";
+                }
             }
-            if (word == "Video")
+            if (Menu.context == "Panel_Stats")
             {
-                Debug.Log("VIDEO SETTINGS");
-                word = "";
-            }
-            if (word == "Difficulty")
-            {
-                Debug.Log("DIFFICULTY SETTINGS");
-                word = "";
-            }
-            if (word == "Accessibility")
-            {
-                Debug.Log("ACCESSIBILITY SETTINGS");
-                word = "";
-            }
-            if (word == "Audio")
-            {
-                Debug.Log("AUDIO SETTINGS");
-                word = "";
-            }
-        }
-        if (Menu.context == "Panel_Boards")
-        {
-            if (word == "Back")
-            {
-                Menu.SetCurrentFromVoice("Panel_Main");
-                word = "";
-            }
-            if (word == "One")
-            {
-                Debug.Log("BOARD ONE");
-                word = "";
-            }
-            if (word == "Two")
-            {
-                Debug.Log("BOARD TWO");
-                word = "";
-            }
-            if (word == "Three")
-            {
-                Debug.Log("BOARD THREE");
-                word = "";
-            }
-            if (word == "Four")
-            {
-                Debug.Log("BOARD FOUR");
-                word = "";
-            }
-        }
-        if (Menu.context == "Panel_Stage")
-        {
-            if (word == "Back")
-            {
-                Menu.SetCurrentFromVoice("Panel_Main");
-                word = "";
-            }
-            if (word == "One")
-            {
-                Debug.Log("STAGE ONE");
-                word = "";
-            }
-            if (word == "Two")
-            {
-                Debug.Log("STAGE TWO");
-                word = "";
-            }
-            if (word == "Three")
-            {
-                Debug.Log("STAGE THREE");
-                word = "";
-            }
-            if (word == "Four")
-            {
-                Debug.Log("STAGE FOUR");
-                word = "";
-            }
-            if (word == "Tutorial")
-            {
-                Debug.Log("STAGE TUTORIAL");
-                word = "";
-            }
-        }
-        if (Menu.context == "Panel_Stats")
-        {
-            if (word == "Back")
-            {
-                Menu.SetCurrentFromVoice("Panel_Main");
-                word = "";
+                if (word == "Back")
+                {
+                    Menu.SetCurrentFromVoice("Panel_Main");
+                    word = "";
+                }
             }
         }
 
