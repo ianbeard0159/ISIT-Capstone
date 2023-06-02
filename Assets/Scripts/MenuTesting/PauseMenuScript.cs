@@ -15,37 +15,53 @@ public class PauseMenuScript : MonoBehaviour
     private bool isGamePaused = false;
     private bool shouldBePaused = false;
 
+
+    public bool initBool = false;
+
     public Stopwatch runTimer;
 
-    void Start()
+    void init()
     {
         TimeText.text = "";
         runTimer = new Stopwatch();
         runTimer.Start();
+        initBool = true;
+    }
+
+    void Start()
+    {
+        init();
     }
 
     private void Update()
     {
-        TimeText.text = runTimer.Elapsed.ToString();
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (initBool == false)
         {
-            TpToStartPoint();
+            init();
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        else
         {
-            UnityEngine.Debug.Log("Space");
-            if (shouldBePaused)
-                shouldBePaused = false;
-            else
-                shouldBePaused = true;
-        }
-        if (shouldBePaused && !isGamePaused)
-        {
-            Pause();                 
-        }
-        else if (!shouldBePaused && isGamePaused)
-        {
-            Resume();
+            TimeText.text = runTimer.Elapsed.ToString();
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                TpToStartPoint();
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                UnityEngine.Debug.Log("Space");
+                if (shouldBePaused)
+                    shouldBePaused = false;
+                else
+                    shouldBePaused = true;
+            }
+            if (shouldBePaused && !isGamePaused)
+            {
+                Pause();
+            }
+            else if (!shouldBePaused && isGamePaused)
+            {
+                Resume();
+            }
         }
     }
     //one bool for game should be paused

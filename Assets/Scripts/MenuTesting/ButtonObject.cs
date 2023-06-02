@@ -8,6 +8,7 @@ public class ButtonObject : MonoBehaviour, iGazeReceiver
 {
     private bool isGazingUpon;
     float _t;
+    private Animator mAnimator;
 
     private Button button = null;
 
@@ -16,32 +17,35 @@ public class ButtonObject : MonoBehaviour, iGazeReceiver
     {
         button = GetComponent<Button>();
         _t = 0f;
+        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Tricks.hoverBuffer > 0f)
+        if (isGazingUpon)
         {
-            _t = 0f;
-            Tricks.hoverBuffer -= Time.unscaledDeltaTime;
-            UnityEngine.Debug.Log("Hover Buffer: " + Tricks.hoverBuffer);
-        }
-        else if (isGazingUpon)
-        {
+            mAnimator.SetBool("GazingButtonBool", true);
             //if (_t >= 1f)
             //if (timetest >= 10)
-            if(_t >= 2f)
+            if (_t >= 2f)
             {
+                //mAnimator.SetTrigger("NotGazingButton");
+                mAnimator.SetBool("GazingButtonBool", false);
                 UnityEngine.Debug.Log("BUTTON BEING INVOKED");
                 //click the button
-                button.onClick.Invoke();
+                if (button.onClick != null)
+                {
+                    button.onClick.Invoke();
+                }
+                
                 
                 //_t = 0f;
                 //transform.Rotate(0, 3, 0);
             }
             else
             {
+                
                 _t += Time.unscaledDeltaTime;
                 UnityEngine.Debug.Log("Gazing " + _t);
             }
@@ -50,9 +54,8 @@ public class ButtonObject : MonoBehaviour, iGazeReceiver
         {
             //Tricks.hoverTime = 0;
             //UnityEngine.Debug.Log("Somehow called every frame");
+            mAnimator.SetBool("GazingButtonBool", false);
             _t = 0f;
-            UnityEngine.Debug.Log("SURELY THIS IS BEING CALLED " + _t);
-            //UnityEngine.Debug.Log("This should be getting called");
         }
         //UnityEngine.Debug.Log("_t = " + timetest);
 
