@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Menu: {fileID: 0}
+  pMenu: {fileID: 0}
   scene:
     m_Handle: 0
   initBool: 0
@@ -63,10 +64,10 @@ MonoBehaviour:
   - three sixty
   confidence: 1
   results: 
-  pauseMenuUI: {fileID: 0}
   playerReference: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  pauseMenu: {fileID: 0}
+  isGamePaused: 0
+  pauseScript: {fileID: 0}
   negativeOneEightyAction:
     m_Name: Negative One Eighty
     m_Type: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Menu: {fileID: 0}
+  pMenu: {fileID: 0}
   scene:
     m_Handle: 0
   initBool: 0
@@ -417,10 +419,10 @@ MonoBehaviour:
   - three sixty
   confidence: 1
   results: 
-  pauseMenuUI: {fileID: 0}
   playerReference: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  pauseMenu: {fileID: 0}
+  isGamePaused: 0
+  pauseScript: {fileID: 0}
   negativeOneEightyAction:
     m_Name: Negative One Eighty
     m_Type: 0

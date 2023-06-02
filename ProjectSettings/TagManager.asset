@@ -11,6 +11,8 @@ TagManager:
   - Blindfold
   - ReturnMenuPosition
   - Menu
+  - PauseMenu
+  - pauseMenuUI
   layers:
   - Default
   - TransparentFX
