@@ -9,31 +9,28 @@ using System.Linq;
 
 public class PlayerMover : MonoBehaviour, IMover
 {
+    public bool initBool = false;
     CharacterController characterController;
     public Rigidbody playerRgbody;
     public Board boardStat;
 
     //Allows player movement, Will be set true via menu play button, set to false at the end of the map
     public bool _inGame = false;
+    public bool _inMenu = false;
 
     //Flags to track player postion
     private bool _inFeature;
-    public bool _onGround;
-    public bool _closeToGround;
+    public bool _onGround = true;
+    public bool _closeToGround = true;
+    public float distanceToGround;
+    public float onGroundOffset;
+    public float bufferCheckDistance = 0.001f;
 
     //Get objects, board used for movement
     //Board for movement, ground and prox for context
     public GameObject board;
     private GameObject ground;
     private GameObject prox;
-
-    ////Voice comands
-    ////keywords are the phrases the game will be looking for
-    //public string[] keywords = new string[] { "pause" };
-    //public ConfidenceLevel confidence = ConfidenceLevel.Medium;
-    //protected PhraseRecognizer recognizer;
-    //public string results; //results might be extra, consider deleting
-    //protected string word = ""; //what the player has said
 
     public InputAction jumpAction;
 
@@ -47,6 +44,8 @@ public class PlayerMover : MonoBehaviour, IMover
         jumpAction.Disable();
     }
 
+    float timeCount = 0.0f;
+
     //Score
     public int actTrickScore;
     public int potTrickScore;
@@ -56,6 +55,7 @@ public class PlayerMover : MonoBehaviour, IMover
     public Stopwatch runTimer; //start on menu button press
     public double runTime; //at endzone, stop timer
     public Stopwatch airTimer;
+    public float highestAir;
 
     public bool inTrick;
 
@@ -74,31 +74,62 @@ public class PlayerMover : MonoBehaviour, IMover
     // Start is called before the first frame update
     void Start()
     {
+        runTimer = new Stopwatch();
+        airTimer = new Stopwatch();
+
+        //delete after menu intergration
+        //_inGame = true;
+    }
+
+    public void init()
+    {
         characterController = GetComponent<CharacterController>();
         playerRgbody = GetComponent<Rigidbody>();
         board = GameObject.FindGameObjectWithTag("Board");
         boardStat = board.GetComponent<Board>();
-        runTimer = new Stopwatch();
-        airTimer = new Stopwatch();
-
-        //fills the voice conrol recognizer with the keyword list
-        //if (keywords != null)
-        //{
-        //    recognizer = new KeywordRecognizer(keywords, confidence);
-        //    recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
-        //    recognizer.Start();
-        //}
-
-        //delete after menu intergration
-        _inGame = true;
-
-        //start stopwatch
-        runTimer.Start();
+        initBool = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!initBool)
+        {
+            init();  
+        }
+        //Automatic unstuck
+        //if (playerRgbody.velocity.magnitude < 0.01)
+        //{
+        //    Vector3 temp = transform.position;
+        //    temp.y += 5;
+        //    transform.position = temp;
+        //}
+        onGroundOffset = (GetComponent<CapsuleCollider>().height / 2) + bufferCheckDistance;
+
+        RaycastHit hit;
+        Physics.Raycast(transform.position, -Vector3.up, out hit);
+        distanceToGround = hit.distance;
+            if (distanceToGround < 0.3)
+            {
+                _onGround = true;
+            }
+            else
+            {
+                _onGround = false;
+                UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
+            if (highestAir < distanceToGround)
+            {
+                highestAir = distanceToGround;
+            }
+            }
+            if (distanceToGround < 5)
+            {
+                _closeToGround = true;
+            }
+            else
+            {
+                _closeToGround = false;
+            }
         //take camera direction and rotation,
         //currently not using camera rotation.
         Vector3 cameraDir = Camera.main.transform.forward;
@@ -132,12 +163,12 @@ public class PlayerMover : MonoBehaviour, IMover
             }
             else if (!_onGround)
             {
-                //UnityEngine.Debug.Log("FALLING");
-                //UnityEngine.Debug.Log("GRAVITY : " + gravity);
-                //UnityEngine.Debug.Log("TIME : " + timeCount);
+                UnityEngine.Debug.Log("FALLING");
+                UnityEngine.Debug.Log("GRAVITY : " + gravity);
+                UnityEngine.Debug.Log("TIME : " + timeCount);
                 //UnityEngine.Debug.Log("Going : " + desiredVelocity);
                 //playerRgbody.velocity = desiredVelocity + gravity;
-                //UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
+                UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
                 //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
                 //playerRgbody.velocity = desiredVelocity;
                 playerRgbody.AddForce(gravity);
@@ -145,7 +176,7 @@ public class PlayerMover : MonoBehaviour, IMover
             }            
             else if (_onGround)
             {
-                //UnityEngine.Debug.Log("ON GROUND");
+                UnityEngine.Debug.Log("ON GROUND");
                 float speed = playerRgbody.velocity.magnitude;
 
                 playerRgbody.velocity = Vector3.zero;
@@ -157,10 +188,10 @@ public class PlayerMover : MonoBehaviour, IMover
                 if ((playerRgbody.velocity.magnitude < boardStat.boardMaxSpeed))
                 {                    
                     playerRgbody.AddForce(boardDir * boardStat.boardSpeed);
-                    //UnityEngine.Debug.Log("MOVING");
-                    //UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
+                    UnityEngine.Debug.Log("MOVING");
+                    UnityEngine.Debug.Log("ADDING SPEED : " + boardDir * boardStat.boardSpeed);
                 }
-                //UnityEngine.Debug.Log("Going : " + desiredVelocity);
+                UnityEngine.Debug.Log("Going : " + desiredVelocity);
                 playerRgbody.velocity = desiredVelocity;
 
                 //UnityEngine.Debug.Log("speed : " + speed);
@@ -200,15 +231,6 @@ public class PlayerMover : MonoBehaviour, IMover
         }
     }
 
-    ////shuts down voice recognition when the game closes
-    //private void OnApplicationQuit()
-    //{
-    //    if (recognizer != null && recognizer.IsRunning)
-    //    {
-    //        recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
-    //        recognizer.Stop();
-    //    }
-    //}
     //get stats
 
     //highest jump

@@ -67,8 +67,7 @@ public class EndZone : MonoBehaviour
             {
                 Time.timeScale = 1;
                 pMover._inGame = true;
-                pMover._onGround = true;
-                pMover._closeToGround = true;
+                //pMover._onGround = true;
                 activate = false;
                 in_collider.transform.position = startPoint.transform.position;
                 pRB.velocity = Vector3.zero;

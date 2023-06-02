@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
 
     public Panel currentPanel = null;
     private List<Panel> panelHistory = new List<Panel>();
+    private Panel[] panels;
+
+    public string context = "Panel_Main";
 
     private void Start()
     {
@@ -15,7 +19,7 @@ public class MenuManager : MonoBehaviour
 
     private void SetupPanels()
     {
-        Panel[] panels = GetComponentsInChildren<Panel>();
+        panels = GetComponentsInChildren<Panel>();
 
         foreach (Panel panel in panels)
         {
@@ -54,7 +58,7 @@ public class MenuManager : MonoBehaviour
         SetCurrent(newPanel);
     }
 
-    private void SetCurrent(Panel newPanel)
+    public void SetCurrent(Panel newPanel)
     {
         currentPanel.Hide();
         SetColliders(currentPanel, false);
@@ -62,7 +66,26 @@ public class MenuManager : MonoBehaviour
         currentPanel = newPanel;
         SetColliders(currentPanel, true);
 
+        context = currentPanel.name;
         currentPanel.Show();
+    }
+
+    public void SetCurrentFromVoice(string newPanel)
+    {
+        foreach (var panel in panels)
+        {
+            if (panel.name == newPanel)
+            {
+                currentPanel.Hide();
+                SetColliders(currentPanel, false);
+
+                currentPanel = panel;
+                SetColliders(currentPanel, true);
+
+                context = currentPanel.name;
+                currentPanel.Show();
+            }
+        }
     }
 
 
@@ -75,5 +98,16 @@ public class MenuManager : MonoBehaviour
             var colliderItem = collidersObj[index];
             colliderItem.enabled = which;
         }
+    }
+
+    public enum Scene
+    {
+        FinalScene,
+        StartingScene,
+    }
+
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
