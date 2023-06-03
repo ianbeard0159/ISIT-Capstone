@@ -10,6 +10,7 @@ public class EndZone : MonoBehaviour
     public PauseMenuScript pauseMenu;
     private Collider in_collider;
     private bool activate = false;
+    public Tricks pTricks;
 
     float timerOne;
     float timerTwo;
@@ -103,8 +104,8 @@ public class EndZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))// && !activate)
         {
+            pTricks.isGamePaused = true;
             pauseMenu.Pause();
-
             //in_collider = other;
             //activate = true;
         }

@@ -168,17 +168,17 @@ PrefabInstance:
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: keywords.Array.data[8]
-      value: options
+      value: Options
       objectReference: {fileID: 0}
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: keywords.Array.data[9]
-      value: boards
+      value: Boards
       objectReference: {fileID: 0}
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: keywords.Array.data[10]
-      value: play
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}

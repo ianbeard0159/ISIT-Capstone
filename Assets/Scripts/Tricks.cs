@@ -171,12 +171,12 @@ public class Tricks : MonoBehaviour
         if (scene.name == "StartingScene"){
             if (Menu.context == "Panel_Main")
             {
-                if (word == "options")
+                if (word == "Options")
                 {
                     Menu.SetCurrentFromVoice("Panel_Options");
                     word = "";
                 }
-                if (word == "boards")
+                if (word == "Boards")
                 {
                     Menu.SetCurrentFromVoice("Panel_Boards");
                     word = "";
@@ -186,7 +186,7 @@ public class Tricks : MonoBehaviour
                     Menu.SetCurrentFromVoice("Panel_Stages");
                     word = "";
                 }
-                if (word == "play")
+                if (word == "Play")
                 {
                     Menu.LoadScene("FinalScene");
                     word = "";
@@ -559,8 +559,6 @@ public class Tricks : MonoBehaviour
             pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
             word = "";
         }
-        if (isGamePaused)
-        {
             if (word == "reset")
             {
                 pauseScript.TpToStartPoint();
@@ -568,7 +566,6 @@ public class Tricks : MonoBehaviour
                 isGamePaused = false;
                 word = "";
             }
-        }
         if (pMover._onGround)
         {
             word = "";
