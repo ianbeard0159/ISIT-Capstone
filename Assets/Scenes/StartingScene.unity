@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
       propertyPath: keywords.Array.size
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
@@ -239,6 +239,11 @@ PrefabInstance:
         type: 3}
       propertyPath: keywords.Array.data[22]
       value: tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 598794630246155938, guid: e91a72b5a9ca8de4c8634343276758ad,
+        type: 3}
+      propertyPath: keywords.Array.data[23]
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 4832606036110871707, guid: e91a72b5a9ca8de4c8634343276758ad,
         type: 3}
@@ -325,7 +330,9 @@ PrefabInstance:
       propertyPath: keywords.Array.data[8]
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7977585256115404872, guid: e91a72b5a9ca8de4c8634343276758ad, type: 3}
+    - {fileID: 8727387106022565715, guid: e91a72b5a9ca8de4c8634343276758ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e91a72b5a9ca8de4c8634343276758ad, type: 3}
 --- !u!1 &19896409
 GameObject:
@@ -1470,7 +1477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &196899903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4203,7 +4210,7 @@ GameObject:
   - component: {fileID: 718205139}
   - component: {fileID: 718205144}
   m_Layer: 5
-  m_Name: StatsButton
+  m_Name: QuitButton
   m_TagString: PauseMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4301,11 +4308,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1125842798}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: SetCurrentWithHistory
-        m_Mode: 2
+        m_MethodName: QuitApp
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 196899903}
-          m_ObjectArgumentAssemblyTypeName: Panel, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5504,7 +5511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stats
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -54,7 +54,7 @@ public class Tricks : MonoBehaviour
     public InputAction negativeOneEightyAction;
     public InputAction oneEightyAction;
     public InputAction threeSixtyAction;
-    public InputAction sevenTwentyAction;    
+    public InputAction sevenTwentyAction;
     public InputAction backflipAction;
     public InputAction backslideAction;
     public InputAction frontflipAction;
@@ -63,7 +63,7 @@ public class Tricks : MonoBehaviour
     public InputAction unstuck;
 
     //boolean to toss the player off of a spline when reset from pause menu
-    public static bool pauseReset ;
+    public static bool pauseReset;
     //int to manage time to hover
     public static int hoverTime;
 
@@ -102,7 +102,7 @@ public class Tricks : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         if (scene.name == "StartingScene")
         {
-            Menu = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();    
+            Menu = GameObject.FindGameObjectWithTag("Menu").GetComponent<MenuManager>();
         }
         if (scene.name == "FinalScene")
         {
@@ -127,7 +127,7 @@ public class Tricks : MonoBehaviour
         //set pausereset to false
         pauseReset = false;
         hoverTime = 0;
-        hoverBuffer = 0f;        
+        hoverBuffer = 0f;
     }
 
     public void LoadKeywords()
@@ -141,7 +141,7 @@ public class Tricks : MonoBehaviour
             Debug.Log(recognizer.IsRunning);
         }
 
-        //logs all the avalibe microphones
+        //logs all the available microphones
         foreach (var device in Microphone.devices)
         {
             Debug.Log("Name: " + device);
@@ -159,7 +159,7 @@ public class Tricks : MonoBehaviour
     void Update()
     {
         if (!initBool)
-        {        
+        {
             init();
         }
         if (!pMover.initBool)
@@ -168,7 +168,8 @@ public class Tricks : MonoBehaviour
         }
         //logs the last trick used
         var lastTrick = "";
-        if (scene.name == "StartingScene"){
+        if (scene.name == "StartingScene")
+        {
             if (Menu.context == "Panel_Main")
             {
                 if (word == "Options")
@@ -191,10 +192,10 @@ public class Tricks : MonoBehaviour
                     Menu.LoadScene("FinalScene");
                     word = "";
                 }
-                if (word == "stats")
+                if (word == "Quit")
                 {
-                    Menu.SetCurrentFromVoice("Panel_Stats");
                     word = "";
+                    Menu.QuitApp();
                 }
             }
             if (Menu.context == "Panel_Options")
@@ -309,6 +310,11 @@ public class Tricks : MonoBehaviour
                     pMenu.SetCurrentFromVoice("Panel_Options");
                     word = "";
                 }
+                if (word == "Quit")
+                {
+                    word = "";
+                    pMenu.QuitApp();
+                }
             }
             if (pMenu.context == "Panel_Options")
             {
@@ -340,9 +346,9 @@ public class Tricks : MonoBehaviour
             }
         }
 
-            //if the player is not on the ground, or in a trick,
-            //they can call out a trick name or 'gamepad' input
-            //Debug.Log(pMover);
+        //if the player is not on the ground, or in a trick,
+        //they can call out a trick name or 'gamepad' input
+        //Debug.Log(pMover);
         if (!pMover._closeToGround)
         {
             animator.enabled = true;
@@ -481,11 +487,11 @@ public class Tricks : MonoBehaviour
                         word = "";
                     }
                 }
-                
-            }  
+
+            }
             else
             {
-                
+
                 if (pMover._onGround)
                 {
                     //crash
@@ -513,40 +519,39 @@ public class Tricks : MonoBehaviour
             lastTrick = "";
             word = "";
         }
-        switch (word){
-            case "pause":
-            case "stop":
-                Debug.Log("CALLING STOP!");
-                if (!isGamePaused)
-                {
-                    isGamePaused = true;
-                    pauseScript.Pause();
-                }
-                word = "";
-                break;
-            case "resume":
-            case "go":
-                Debug.Log("UNPAUSE!");
-                if (isGamePaused)
-                {
-                    pauseScript.Resume();
-                    isGamePaused = false;
-                }                
-                word = "";
-                break;
-            case "unstuck":
-                Vector3 temp = transform.position;
-                temp.y += 10;
-                player.transform.position = temp;
-                word = "";
-                break;
-            case "jump":
-                pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
-                word = "";
-                break;
-            default:
-                break;
-        }      
+        if (word == "pause" || word == "stop" || Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("CALLING STOP!");
+            if (!isGamePaused)
+            {
+                isGamePaused = true;
+                pauseScript.Pause();
+            }
+            word = "";
+        }
+        if (word == "resume" || word == "go" || Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log("UNPAUSE!");
+            if (isGamePaused)
+            {
+                pauseScript.Resume();
+                isGamePaused = false;
+            }
+            word = "";
+        }
+        if (word == "unstuck" || Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Vector3 temp = transform.position;
+            temp.y += 10;
+            player.transform.position = temp;
+            word = "";
+        }
+        //if ("jump")
+        //{
+        //    pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
+        //    word = "";
+        //}
+
         if (unstuck.triggered)
         {
             Vector3 temp = transform.position;
@@ -559,13 +564,13 @@ public class Tricks : MonoBehaviour
             pRB.AddForce(100 * Vector3.up, ForceMode.Impulse);
             word = "";
         }
-            if (word == "reset")
-            {
-                pauseScript.TpToStartPoint();
-                pMover.StatReset();
-                isGamePaused = false;
-                word = "";
-            }
+        if (word == "reset")
+        {
+            pauseScript.TpToStartPoint();
+            pMover.StatReset();
+            isGamePaused = false;
+            word = "";
+        }
         if (pMover._onGround)
         {
             word = "";
@@ -580,6 +585,7 @@ public class Tricks : MonoBehaviour
 
     private void OnDestroy()
     {
+        UnityEngine.Debug.Log("Killing voice");
         KillVoice();
     }
 

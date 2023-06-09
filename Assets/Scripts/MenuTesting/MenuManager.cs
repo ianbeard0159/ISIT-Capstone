@@ -111,4 +111,10 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void QuitApp()
+    {
+        UnityEngine.Debug.Log("quitting game");
+        Application.Quit();        
+    }
 }

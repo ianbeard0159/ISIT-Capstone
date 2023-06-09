@@ -9,8 +9,11 @@ public class SnowboardSound : MonoBehaviour
 
     public PlayerMover player;
     public Tricks pTricks;
+    public bool pOnGround;
+    public bool gamePaused;
 
     public bool initBool;
+    public bool shouldBePlaying;
 
     public void init()
     {
@@ -28,20 +31,31 @@ public class SnowboardSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pOnGround = player._onGround;
+        gamePaused = pTricks.isGamePaused;
+
         if (!initBool)
         {
             init();
         }
-        if (player._onGround || !pTricks.isGamePaused)
-        {
-            if (!source.isPlaying)
-            {
-                source.Play();
-            }            
-        }
         else
         {
-            source.Stop();
+            shouldBePlaying = true;
+            if (!pOnGround || gamePaused)
+            {
+                    shouldBePlaying = false;
+            }
+            if (shouldBePlaying)
+            {
+                if (!source.isPlaying)
+                {
+                    source.Play();
+                }
+            }            
+            else
+            {
+                source.Stop();
+            }
         }
     }
 }

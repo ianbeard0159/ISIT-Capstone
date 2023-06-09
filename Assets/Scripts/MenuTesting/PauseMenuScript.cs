@@ -163,4 +163,6 @@ public class PauseMenuScript : MonoBehaviour
         Resume();
         SceneManager.LoadScene("StartingScene");
     }
+
+
 }
