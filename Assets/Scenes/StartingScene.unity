@@ -3490,6 +3490,11 @@ GameObject:
   - component: {fileID: 518487424}
   - component: {fileID: 518487425}
   - component: {fileID: 518487426}
+  - component: {fileID: 518487431}
+  - component: {fileID: 518487430}
+  - component: {fileID: 518487429}
+  - component: {fileID: 518487428}
+  - component: {fileID: 518487427}
   m_Layer: 0
   m_Name: Response Handler
   m_TagString: Untagged
@@ -3602,6 +3607,141 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDidNotMatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onOutOfDomain:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &518487427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518487423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591c3d6f017c11b4faa41506d75635b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Voice: {fileID: 1131618176}
+  ValidateEarly: 0
+  intent: boards
+  confidenceThreshold: 0.6
+  valueMatchers: []
+  formattedValueEvents: []
+  onMultiValueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDidNotMatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onOutOfDomain:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &518487428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518487423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591c3d6f017c11b4faa41506d75635b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Voice: {fileID: 1131618176}
+  ValidateEarly: 0
+  intent: options
+  confidenceThreshold: 0.6
+  valueMatchers: []
+  formattedValueEvents: []
+  onMultiValueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDidNotMatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onOutOfDomain:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &518487429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518487423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591c3d6f017c11b4faa41506d75635b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Voice: {fileID: 1131618176}
+  ValidateEarly: 0
+  intent: stage_two
+  confidenceThreshold: 0.6
+  valueMatchers: []
+  formattedValueEvents: []
+  onMultiValueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDidNotMatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onOutOfDomain:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &518487430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518487423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591c3d6f017c11b4faa41506d75635b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Voice: {fileID: 1131618176}
+  ValidateEarly: 0
+  intent: stage_one
+  confidenceThreshold: 0.6
+  valueMatchers: []
+  formattedValueEvents: []
+  onMultiValueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onDidNotMatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onOutOfDomain:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &518487431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518487423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591c3d6f017c11b4faa41506d75635b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Voice: {fileID: 1131618176}
+  ValidateEarly: 0
+  intent: stages
+  confidenceThreshold: 0.6
+  valueMatchers: []
+  formattedValueEvents: []
+  onMultiValueEvent:
+    m_PersistentCalls:
+      m_Calls: []
   onDidNotMatch:
     m_PersistentCalls:
       m_Calls: []
