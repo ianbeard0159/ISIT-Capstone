@@ -13,6 +13,7 @@ TagManager:
   - Menu
   - PauseMenu
   - pauseMenuUI
+  - PauseScript
   layers:
   - Default
   - TransparentFX

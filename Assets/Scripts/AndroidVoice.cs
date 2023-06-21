@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class AndroidVoice : MonoBehaviour
 {
     public MenuManager pMenu;
     public bool initBool = false;
@@ -27,7 +27,7 @@ public class NewBehaviourScript : MonoBehaviour
     public static bool pauseReset;
     //int to manage time to hover
     public static int hoverTime;
-    public string lastTrick = "";
+    public string lastTrick = ""; 
 
     public void init()
     {
@@ -99,6 +99,14 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
+    public void MainMenu()
+    {
+        if (isGamePaused)
+        {
+            pauseScript.LoadMenu();
+        }
+    }
+
     public void Pause()
     {
         Debug.Log("CALLING STOP!");
@@ -133,6 +141,15 @@ public class NewBehaviourScript : MonoBehaviour
             pauseScript.TpToStartPoint();
             pMover.StatReset();
             isGamePaused = false;
+        }
+    }
+
+    public void Quit()
+    {
+        if (isGamePaused)
+        {
+            UnityEngine.Debug.Log("quitting game");
+            Application.Quit();
         }
     }
 
