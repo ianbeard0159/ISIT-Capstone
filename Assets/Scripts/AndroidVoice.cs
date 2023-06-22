@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Oculus.Voice;
 
 public class AndroidVoice : MonoBehaviour
 {
@@ -23,21 +24,25 @@ public class AndroidVoice : MonoBehaviour
     public bool isGamePaused = false;
     public PauseMenuScript pauseScript;
 
+    float[] clipSampleData = new float[1024];
+
     //boolean to toss the player off of a spline when reset from pause menu
     public static bool pauseReset;
     //int to manage time to hover
     public static int hoverTime;
-    public string lastTrick = ""; 
-
+    public string lastTrick = "";
+    
     public void init()
     {
         pMenu = GameObject.FindGameObjectWithTag("pauseMenuUI").GetComponent<MenuManager>();
         pauseScript = GameObject.FindGameObjectWithTag("PauseScript").GetComponent<PauseMenuScript>();
+
+
         //get the player mover and animator
         player = GameObject.FindGameObjectWithTag("Player");
         pMover = player.GetComponent<PlayerMover>();
         pRB = player.GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        animator = player.GetComponentInChildren<Animator>();
         animator.enabled = false;
 
         initBool = true;
@@ -116,7 +121,7 @@ public class AndroidVoice : MonoBehaviour
             pauseScript.Pause();
         }
     }
-    
+
     public void Unpause()
     {
         Debug.Log("UNPAUSE!");
@@ -129,7 +134,7 @@ public class AndroidVoice : MonoBehaviour
 
     public void Unstuck()
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = player.transform.position;
         temp.y += 10;
         player.transform.position = temp;
     }
@@ -155,6 +160,7 @@ public class AndroidVoice : MonoBehaviour
 
     public void DoTrickRail(string trick)
     {
+        Debug.Log("YOU SAID: " + trick);
         if (!pMover._closeToGround)
         {
             animator.enabled = true;
@@ -165,7 +171,7 @@ public class AndroidVoice : MonoBehaviour
                     //once in a trick, set intrick to true, play the animation
                     pMover.inTrick = true;
                     animator.Play(trick);
-                    //animator.SetBool();
+                    //animator.SetBool(trick, true);
                     //animator.SetTrigger();
                     //in this trick matches the last trick, player recieves reduced points
                     if (trick == lastTrick)
@@ -188,16 +194,19 @@ public class AndroidVoice : MonoBehaviour
             {
                 Debug.Log("PLAYER ALREADY DOING TRICK!");
             }
-            
+
         }
         else
         {
             Debug.Log("PLAYER TOO CLOSE TO GROUND!");
         }
+        animator.SetBool(trick, false);
+        pMover.inTrick = false;
     }
 
     public void DoTrick(string trick)
     {
+        Debug.Log("YOU SAID: " + trick);
         if (!pMover._closeToGround)
         {
             animator.enabled = true;
@@ -205,6 +214,7 @@ public class AndroidVoice : MonoBehaviour
             {
                 if (!pMover.flag_engaged)
                 {
+                    Debug.Log("DOING TRICK: " + trick);
                     //once in a trick, set intrick to true, play the animation
                     pMover.inTrick = true;
                     animator.Play(trick);
@@ -237,6 +247,8 @@ public class AndroidVoice : MonoBehaviour
         {
             Debug.Log("PLAYER TOO CLOSE TO GROUND!");
         }
+        animator.SetBool(trick, false);
+        pMover.inTrick = false;
     }
 
     public void FindMicrophones()

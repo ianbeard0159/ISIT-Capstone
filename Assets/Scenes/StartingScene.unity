@@ -6454,7 +6454,7 @@ MonoBehaviour:
     _onStartListening:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1131618178}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: AndroidVoice, Assembly-CSharp
           m_MethodName: FindMicrophones
           m_Mode: 1
@@ -6528,7 +6528,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131618175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a4ae06c45c3a449870496326bb3ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e0acf9e79ecfae4980a2b6ac47f5025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1199154575

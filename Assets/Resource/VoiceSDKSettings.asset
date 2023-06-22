@@ -20,15 +20,108 @@ MonoBehaviour:
     isPrivate: 1
     createdAt: 2023-06-19T17:18:54-0700
     trainingStatus: 1
-    lastTrainDuration: 22
-    lastTrainedAt: 2023-06-19T18:22:09-0700
-    nextTrainAt: 2023-06-19T18:21:47-0700
+    lastTrainDuration: 40
+    lastTrainedAt: 2023-06-20T12:34:36-0700
+    nextTrainAt: 2023-06-20T12:33:56-0700
     intents:
+    - id: 301276968914877
+      name: accessibility
+      entities: []
+    - id: 1484665292362007
+      name: audio
+      entities: []
+    - id: 1991428147864346
+      name: back
+      entities: []
+    - id: 835750911503407
+      name: backflip
+      entities: []
+    - id: 1332237694029637
+      name: backslide
+      entities: []
+    - id: 952541985866000
+      name: boards
+      entities: []
+    - id: 929384941489554
+      name: difficulty
+      entities: []
+    - id: 968079844505039
+      name: four
+      entities: []
+    - id: 564659399079953
+      name: frontflip
+      entities: []
+    - id: 820823796347095
+      name: frontslide
+      entities: []
+    - id: 943565226925745
+      name: go
+      entities: []
+    - id: 764221375703925
+      name: menu
+      entities: []
+    - id: 1251622738887073
+      name: negative_one_eighty
+      entities: []
+    - id: 1209056489768206
+      name: one
+      entities: []
+    - id: 980030583428640
+      name: one_eighty
+      entities: []
+    - id: 578403534438043
+      name: options
+      entities: []
+    - id: 1304286436842729
+      name: pause
+      entities: []
     - id: 945736386708796
       name: play
       entities: []
-    - id: 801637044751124
+    - id: 292894996496114
       name: quit
+      entities: []
+    - id: 259049396810279
+      name: reset
+      entities: []
+    - id: 159566103700392
+      name: resume
+      entities: []
+    - id: 1323147778268066
+      name: seven_twenty
+      entities: []
+    - id: 1335946480467153
+      name: stage
+      entities: []
+    - id: 779017443956469
+      name: stage_one
+      entities: []
+    - id: 1251876848783214
+      name: stage_two
+      entities: []
+    - id: 819928133078386
+      name: stages
+      entities: []
+    - id: 994504155057102
+      name: stats
+      entities: []
+    - id: 313497287668580
+      name: stop
+      entities: []
+    - id: 829394195195484
+      name: three
+      entities: []
+    - id: 944178006865296
+      name: three_sixty
+      entities: []
+    - id: 5964667133645501
+      name: two
+      entities: []
+    - id: 975331873722274
+      name: unstuck
+      entities: []
+    - id: 1692533011168858
+      name: video
       entities: []
     entities: []
     traits: []
