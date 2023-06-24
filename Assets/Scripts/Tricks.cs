@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
+//using UnityEngine.Windows.Speech;
 using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,8 +39,8 @@ public class Tricks : MonoBehaviour
         "Play", "Stages", "Stats", "Back", "Video", "Difficulty",
         "Accessibility", "Audio", "one", "two", "three", "four",
         "Tutorial", "Main Menu", "Menu" };
-    public ConfidenceLevel confidence = ConfidenceLevel.Low;
-    protected PhraseRecognizer recognizer;
+    //public ConfidenceLevel confidence = ConfidenceLevel.Low;
+    //protected PhraseRecognizer recognizer;
     public string results; //results might be extra, consider deleting
     protected string word = ""; //what the player has said
 
@@ -133,13 +133,13 @@ public class Tricks : MonoBehaviour
     public void LoadKeywords()
     {
         //fills the voice conrol recognizer with the keyword list
-        if (keywords != null)
-        {
-            recognizer = new KeywordRecognizer(keywords, confidence);
-            recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
-            recognizer.Start();
-            Debug.Log(recognizer.IsRunning);
-        }
+        //if (keywords != null)
+        //{
+        //    recognizer = new KeywordRecognizer(keywords, confidence);
+        //    recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
+        //    recognizer.Start();
+        //    Debug.Log(recognizer.IsRunning);
+        //}
 
         //logs all the available microphones
         foreach (var device in Microphone.devices)
@@ -148,12 +148,12 @@ public class Tricks : MonoBehaviour
         }
     }
 
-    private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
-    {
-        word = args.text;
-        results = "You said: <b>" + word + "</b>";
-        Debug.Log(results);
-    }
+    //private void Recognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    //{
+    //    word = args.text;
+    //    results = "You said: <b>" + word + "</b>";
+    //    Debug.Log(results);
+    //}
 
     // Update is called once per frame
     void Update()
@@ -578,23 +578,23 @@ public class Tricks : MonoBehaviour
     }
 
     //shuts down voice recognition when the game closes
-    private void OnApplicationQuit()
-    {
-        KillVoice();
-    }
+    //private void OnApplicationQuit()
+    //{
+    //    KillVoice();
+    //}
 
-    private void OnDestroy()
-    {
-        UnityEngine.Debug.Log("Killing voice");
-        KillVoice();
-    }
+    //private void OnDestroy()
+    //{
+    //    UnityEngine.Debug.Log("Killing voice");
+    //    KillVoice();
+    //}
 
-    public void KillVoice()
-    {
-        if (recognizer != null && recognizer.IsRunning)
-        {
-            recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
-            recognizer.Stop();
-        }
-    }
+    //public void KillVoice()
+    //{
+    //    if (recognizer != null && recognizer.IsRunning)
+    //    {
+    //        recognizer.OnPhraseRecognized -= Recognizer_OnPhraseRecognized;
+    //        recognizer.Stop();
+    //    }
+    //}
 }
