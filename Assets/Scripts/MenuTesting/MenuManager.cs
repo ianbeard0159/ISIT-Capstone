@@ -109,7 +109,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("FinalScene");
     }
 
     public void QuitApp()

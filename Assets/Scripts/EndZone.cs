@@ -11,6 +11,7 @@ public class EndZone : MonoBehaviour
     private Collider in_collider;
     private bool activate = false;
     public Tricks pTricks;
+    public AndroidVoice pAndroidVoice;
 
     float timerOne;
     float timerTwo;
@@ -105,6 +106,7 @@ public class EndZone : MonoBehaviour
         if (other.CompareTag("Player"))// && !activate)
         {
             pTricks.isGamePaused = true;
+            pAndroidVoice.isGamePaused = true;
             pauseMenu.Pause();
             //in_collider = other;
             //activate = true;

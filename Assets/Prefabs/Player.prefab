@@ -33,7 +33,7 @@ Transform:
   - {fileID: 4832606036110871707}
   - {fileID: 3553316766177909645}
   m_Father: {fileID: 6204264836613629189}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &598794630246155938
 MonoBehaviour:
@@ -255,8 +255,6 @@ GameObject:
   - component: {fileID: 1324698329554287640}
   - component: {fileID: 3217040996150488326}
   - component: {fileID: 5456604431365420930}
-  - component: {fileID: 7977585256115404872}
-  - component: {fileID: 8727387106022565715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -276,10 +274,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1960815231549976080}
   - {fileID: 6722427674443877643}
   - {fileID: 5657691459066268466}
   - {fileID: 2917783784959367822}
-  - {fileID: 1960815231549976080}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -370,213 +368,6 @@ MonoBehaviour:
   runTime: 0
   highestAir: 0
   inTrick: 0
---- !u!95 &7977585256115404872
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516342106476632117}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f5338314d63f354b90b5d01e29512b4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8727387106022565715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516342106476632117}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb31d4637e21187448b00e6fbfc04359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Menu: {fileID: 0}
-  pMenu: {fileID: 0}
-  scene:
-    m_Handle: 0
-  initBool: 0
-  NTime: 0
-  keywords:
-  - negative one eighty
-  - one eighty
-  - Backflip
-  - Backslide
-  - Frontflip
-  - Frontslide
-  - seven twenty
-  - three sixty
-  confidence: 1
-  results: 
-  playerReference: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
-  isGamePaused: 0
-  pauseScript: {fileID: 0}
-  negativeOneEightyAction:
-    m_Name: Negative One Eighty
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 03a1c9d8-877e-4d3b-9f28-17f2012fbabd
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 9c13cd08-ec2d-4855-9003-a2c20c164ac1
-      m_Path: <Gamepad>/dpad/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Negative One Eighty
-      m_Flags: 0
-    m_Flags: 0
-  oneEightyAction:
-    m_Name: One Eighty
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6b4b2037-89c6-4561-878d-4bbba8ac6664
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: cadfdc53-243d-4c21-be0f-5ec8688bc608
-      m_Path: <Gamepad>/dpad/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: One Eighty
-      m_Flags: 0
-    m_Flags: 0
-  threeSixtyAction:
-    m_Name: Three Sixty
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 92f1a244-b69e-4f0e-95c7-51ca0bc8ee2f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 59c53298-5520-4591-8b64-b6394ba24197
-      m_Path: <Gamepad>/dpad/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Three Sixty
-      m_Flags: 0
-    m_Flags: 0
-  sevenTwentyAction:
-    m_Name: Seven Twenty
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 518a078a-d1e9-4ba2-a06c-be3f7fc8b514
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a3c7a646-91e4-4d23-a097-c67632fb8894
-      m_Path: <Gamepad>/dpad/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Seven Twenty
-      m_Flags: 0
-    m_Flags: 0
-  backflipAction:
-    m_Name: Backflip
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b16beab7-cd98-4910-8ace-6c3dd229e600
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d7b953c1-5d46-49ec-a3bd-9a04c0eb2b39
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Backflip
-      m_Flags: 0
-    m_Flags: 0
-  backslideAction:
-    m_Name: Backslide
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 9f47c896-f626-4a3b-8a01-5c7169a2521d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a7915a5c-abaa-4d86-a3c7-6cf2c5310258
-      m_Path: <Gamepad>/buttonEast
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Backslide
-      m_Flags: 0
-    m_Flags: 0
-  frontflipAction:
-    m_Name: Frontflip
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b32a2b69-fe8d-445d-897f-4c9ce1982286
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 9e24b10c-1a26-4da8-b127-eed3ee19e3c8
-      m_Path: <Gamepad>/buttonNorth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Frontflip
-      m_Flags: 0
-    m_Flags: 0
-  frontslideAction:
-    m_Name: Frontslide
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: dca4c4ee-5948-485d-b9c6-445e090d67c3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: b6f5b2c3-8250-400f-9979-f8b98ee68b60
-      m_Path: <Gamepad>/buttonWest
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Frontslide
-      m_Flags: 0
-    m_Flags: 0
-  jumpAction:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6409ce7f-e3e5-45e1-a78f-89094f80698d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  unstuck:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a29d4f06-ca74-4ef2-807b-a0335ac384ac
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!1 &1240951791401158715
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +433,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &610599081064325847
 MeshFilter:
@@ -1181,7 +972,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2380187364328950247
 MeshFilter:
@@ -1286,7 +1077,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6204264836613629189}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1544807815713725781
 MeshFilter:

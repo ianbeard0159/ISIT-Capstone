@@ -1,0 +1,280 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
+  m_Name: VoiceSDKSettings
+  m_EditorClassIdentifier: 
+  _clientAccessToken: MCGEHZNLQNTH77UQZGMKTF4NW26WNKAN
+  _appInfo:
+    name: isitcapstone
+    id: 224916763721301
+    lang: en
+    isPrivate: 1
+    createdAt: 2023-06-19T17:18:54-0700
+    trainingStatus: 1
+    lastTrainDuration: 40
+    lastTrainedAt: 2023-06-20T12:34:36-0700
+    nextTrainAt: 2023-06-20T12:33:56-0700
+    intents:
+    - id: 301276968914877
+      name: accessibility
+      entities: []
+    - id: 1484665292362007
+      name: audio
+      entities: []
+    - id: 1991428147864346
+      name: back
+      entities: []
+    - id: 835750911503407
+      name: backflip
+      entities: []
+    - id: 1332237694029637
+      name: backslide
+      entities: []
+    - id: 952541985866000
+      name: boards
+      entities: []
+    - id: 929384941489554
+      name: difficulty
+      entities: []
+    - id: 968079844505039
+      name: four
+      entities: []
+    - id: 564659399079953
+      name: frontflip
+      entities: []
+    - id: 820823796347095
+      name: frontslide
+      entities: []
+    - id: 943565226925745
+      name: go
+      entities: []
+    - id: 764221375703925
+      name: menu
+      entities: []
+    - id: 1251622738887073
+      name: negative_one_eighty
+      entities: []
+    - id: 1209056489768206
+      name: one
+      entities: []
+    - id: 980030583428640
+      name: one_eighty
+      entities: []
+    - id: 578403534438043
+      name: options
+      entities: []
+    - id: 1304286436842729
+      name: pause
+      entities: []
+    - id: 945736386708796
+      name: play
+      entities: []
+    - id: 292894996496114
+      name: quit
+      entities: []
+    - id: 259049396810279
+      name: reset
+      entities: []
+    - id: 159566103700392
+      name: resume
+      entities: []
+    - id: 1323147778268066
+      name: seven_twenty
+      entities: []
+    - id: 1335946480467153
+      name: stage
+      entities: []
+    - id: 779017443956469
+      name: stage_one
+      entities: []
+    - id: 1251876848783214
+      name: stage_two
+      entities: []
+    - id: 819928133078386
+      name: stages
+      entities: []
+    - id: 994504155057102
+      name: stats
+      entities: []
+    - id: 313497287668580
+      name: stop
+      entities: []
+    - id: 829394195195484
+      name: three
+      entities: []
+    - id: 944178006865296
+      name: three_sixty
+      entities: []
+    - id: 5964667133645501
+      name: two
+      entities: []
+    - id: 975331873722274
+      name: unstuck
+      entities: []
+    - id: 1692533011168858
+      name: video
+      entities: []
+    entities: []
+    traits: []
+    voices:
+    - name: Cael
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cam
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Carl
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+    - name: Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+    - name: Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rosie
+      locale: en_CA
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    composer:
+      canvases: []
+  _configurationId: ff6ab2ad-24f0-4f44-b484-b68214c53387
+  timeoutMS: 10000
+  endpointConfiguration:
+    _uriScheme: 
+    _authority: 
+    _port: 0
+    _witApiVersion: 
+    _message: 
+    _speech: 
+    _dictation: 
+    _synthesize: 
+    _event: 
+    _converse: 
+  isDemoOnly: 0
+  useConduit: 1
+  _manifestLocalPath: ConduitManifest-32c19c71-9993-4398-b549-3a8fa47b6267.json
+  excludedAssemblies:
+  - Oculus.Voice.Demo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - Meta.WitAi.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  relaxedResolution: 0
