@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows.Speech;
+//using UnityEngine.Windows.Speech;
 using System.Linq;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerMover : MonoBehaviour, IMover
 {
@@ -44,18 +44,18 @@ public class PlayerMover : MonoBehaviour, IMover
         jumpAction.Disable();
     }
 
-    float timeCount = 0.0f;
-
     //Score
-    public int actTrickScore;
-    public int potTrickScore;
-    public int markerScore;
+    public int actTrickScore = 0;
+    public int potTrickScore = 0;
+    public int markerScore = 0;
     public float highSpeed = 0;
     public double airTime = 0;
     public Stopwatch runTimer; //start on menu button press
-    public double runTime; //at endzone, stop timer
+    public double runTime = 0; //at endzone, stop timer
     public Stopwatch airTimer;
-    public float highestAir;
+    public float highestAir = 0;
+
+    
 
     public bool inTrick;
 
@@ -76,6 +76,18 @@ public class PlayerMover : MonoBehaviour, IMover
     {
         runTimer = new Stopwatch();
         airTimer = new Stopwatch();
+
+        runTimer.Start();
+
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "StartingScene")
+        {
+            _inGame = false;
+        }
+        if (scene.name == "FinalScene")
+        {
+            _inGame = true;
+        }
 
         //delete after menu intergration
         //_inGame = true;
@@ -104,32 +116,12 @@ public class PlayerMover : MonoBehaviour, IMover
         //    temp.y += 5;
         //    transform.position = temp;
         //}
-        onGroundOffset = (GetComponent<CapsuleCollider>().height / 2) + bufferCheckDistance;
+        onGroundOffset = (GetComponent<CapsuleCollider>().height) + bufferCheckDistance;
 
         RaycastHit hit;
         Physics.Raycast(transform.position, -Vector3.up, out hit);
         distanceToGround = hit.distance;
-            if (distanceToGround < 0.3)
-            {
-                _onGround = true;
-            }
-            else
-            {
-                _onGround = false;
-                //UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
-            if (highestAir < distanceToGround)
-            {
-                highestAir = distanceToGround;
-            }
-            }
-            if (distanceToGround < 5)
-            {
-                _closeToGround = true;
-            }
-            else
-            {
-                _closeToGround = false;
-            }
+       
         //take camera direction and rotation,
         //currently not using camera rotation.
         Vector3 cameraDir = Camera.main.transform.forward;
@@ -157,6 +149,30 @@ public class PlayerMover : MonoBehaviour, IMover
 
         if (_inGame)
         {
+            if (hit.collider.CompareTag("Ground"))
+            {
+                if (distanceToGround < 0.3)
+                {
+                    _onGround = true;
+                }
+                else
+                {
+                    _onGround = false;
+                    //UnityEngine.Debug.Log("DISTANCE FROM GROUND:" + distanceToGround);
+                    if (highestAir < distanceToGround)
+                    {
+                        highestAir = distanceToGround;
+                    }
+                }
+                if (distanceToGround < 5)
+                {
+                    _closeToGround = true;
+                }
+                else
+                {
+                    _closeToGround = false;
+                }
+            }
             if (_inFeature || flag_engaged)
             {
 
@@ -165,14 +181,11 @@ public class PlayerMover : MonoBehaviour, IMover
             {
                 UnityEngine.Debug.Log("FALLING");
                 UnityEngine.Debug.Log("GRAVITY : " + gravity);
-                UnityEngine.Debug.Log("TIME : " + timeCount);
                 //UnityEngine.Debug.Log("Going : " + desiredVelocity);
                 //playerRgbody.velocity = desiredVelocity + gravity;
                 UnityEngine.Debug.Log("VELOCITY : " + playerRgbody.velocity);
-                //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
                 //playerRgbody.velocity = desiredVelocity;
                 playerRgbody.AddForce(gravity);
-                //transform.rotation = Quaternion.Lerp(transform.rotation, boardRotation, (boardStat.boardRotSpeed) * timeCount);
             }            
             else if (_onGround)
             {
@@ -230,8 +243,19 @@ public class PlayerMover : MonoBehaviour, IMover
             }
         }
     }
+    public void StatReset()
+    {
+        actTrickScore = 0;
+        potTrickScore = 0;
+        markerScore = 0;
+        highSpeed = 0;
+        airTime = 0;
+        runTimer.Reset(); //start on menu button press
+        runTime = 0; //at endzone, stop timer
+        airTimer.Reset();
+        highestAir = 0;
 
-    //get stats
-
-    //highest jump
+        runTimer.Start();
+        airTimer.Start();
+    }
 }

@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         SetupPanels();
+        SetCurrentFromVoice("Panel_Main");
     }
 
     private void SetupPanels()
@@ -67,6 +68,7 @@ public class MenuManager : MonoBehaviour
         SetColliders(currentPanel, true);
 
         context = currentPanel.name;
+        Debug.Log("CONTEXT: " + context);
         currentPanel.Show();
     }
 
@@ -88,7 +90,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
     //this method allows you to toggle all of the colliders in any panel on or off depending on parameters
     public void SetColliders(Panel newPanel, bool which)
     {
@@ -108,6 +109,12 @@ public class MenuManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("FinalScene");
+    }
+
+    public void QuitApp()
+    {
+        UnityEngine.Debug.Log("quitting game");
+        Application.Quit();        
     }
 }

@@ -2,30 +2,45 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class PauseMenuScript : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject Leaderboard;
-    public TMP_Text TimeText;
     public Transform playerReference;
     public Vector3 offset;
+    public Vector3 rotationOffset;
+
+    public AudioSource snowboardSound;
     public GameObject startPoint;
     public PlayerMover pMover;
+    public Tricks pTricks;
     private bool isGamePaused = false;
     private bool shouldBePaused = false;
 
+    //stat texts
+    public TMP_Text TimeText;
+    public TMP_Text TrickText;
+    public TMP_Text MarkerText;
+    public TMP_Text SpeedText;
+    public TMP_Text AirText;
+    public TMP_Text HighText;
 
     public bool initBool = false;
-
-    public Stopwatch runTimer;
 
     void init()
     {
         TimeText.text = "";
-        runTimer = new Stopwatch();
-        runTimer.Start();
+        TrickText.text = "";
+        MarkerText.text = "";
+        SpeedText.text = "";
+        AirText.text = "";
+        HighText.text = "";
         initBool = true;
+        pTricks = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Tricks>();
+        pMover = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMover>();
     }
 
     void Start()
@@ -41,27 +56,32 @@ public class PauseMenuScript : MonoBehaviour
         }
         else
         {
-            TimeText.text = runTimer.Elapsed.ToString();
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                TpToStartPoint();
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                UnityEngine.Debug.Log("Space");
-                if (shouldBePaused)
-                    shouldBePaused = false;
-                else
-                    shouldBePaused = true;
-            }
-            if (shouldBePaused && !isGamePaused)
-            {
-                Pause();
-            }
-            else if (!shouldBePaused && isGamePaused)
-            {
-                Resume();
-            }
+            TimeText.text = pMover.runTimer.Elapsed.TotalSeconds.ToString("F1");
+            TrickText.text = pMover.actTrickScore.ToString("F1");
+            MarkerText.text = pMover.markerScore.ToString("F1");
+            SpeedText.text = pMover.highSpeed.ToString("F1");
+            AirText.text = pMover.airTime.ToString("F1");
+            HighText.text = pMover.highestAir.ToString("F1");
+            //    if (Input.GetKeyUp(KeyCode.Escape))
+            //    {
+            //        TpToStartPoint();
+            //    }
+            //    if (Input.GetKeyUp(KeyCode.Space))
+            //    {
+            //        UnityEngine.Debug.Log("Space");
+            //        if (shouldBePaused)
+            //            shouldBePaused = false;
+            //        else
+            //            shouldBePaused = true;
+            //    }
+            //    if (shouldBePaused && !isGamePaused)
+            //    {
+            //        Pause();
+            //    }
+            //    else if (!shouldBePaused && isGamePaused)
+            //    {
+            //        Resume();
+            //    }
         }
     }
     //one bool for game should be paused
@@ -69,13 +89,14 @@ public class PauseMenuScript : MonoBehaviour
     //if the game is paused but should be paused
     public void Resume()
     {
-        runTimer.Start();
+        pMover.runTimer.Start();
         //make the time scale change over time
         pauseMenuUI.SetActive(false);
         Leaderboard.SetActive(false);
         Time.timeScale = 1f;
         Tricks.hoverBuffer = 1f;
         isGamePaused = false;
+        pTricks.isGamePaused = false;
 
         //added the below line, allowing pause to be done through the pause menu "Resume" button
         shouldBePaused = false;
@@ -85,11 +106,12 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Pause()
     {
-        runTimer.Stop();
+        pMover.runTimer.Stop();
         pauseMenuUI.SetActive(true);
         Leaderboard.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
+        pTricks.isGamePaused = true;
         SetMenuPosition();
 
         //show leaderboard on pause for now
@@ -110,7 +132,7 @@ public class PauseMenuScript : MonoBehaviour
         pMover.transform.position = startPoint.transform.position;
         pMover.playerRgbody.velocity = Vector3.zero;
         //resume the game
-        runTimer.Reset();
+        pMover.StatReset();
         Resume();
         
 
@@ -118,7 +140,6 @@ public class PauseMenuScript : MonoBehaviour
         //this prevents the user from being teleported back on immediately
         Invoke("delayedPauseReset", 1);
     }
-
     
     void SetMenuPosition()
     {
@@ -128,12 +149,20 @@ public class PauseMenuScript : MonoBehaviour
 
     void SetLeaderboardPosition()
     {
-        Leaderboard.transform.position = pMover.transform.position + pMover.transform.forward * 5 + offset + pMover.transform.right * 7;
-        Leaderboard.transform.rotation = pMover.transform.rotation;
+        Leaderboard.transform.position = pMover.transform.position + pMover.transform.forward * 5 + offset + pMover.transform.right * 6;
+        Leaderboard.transform.LookAt(2 * Leaderboard.transform.position - pMover.transform.position);
     }
 
     void delayedPauseReset()
     {
-        Tricks.pauseReset = false;
+       Tricks.pauseReset = false;
     }
+
+    public void LoadMenu()
+    {
+        Resume();
+        SceneManager.LoadScene("StartingScene");
+    }
+
+
 }
