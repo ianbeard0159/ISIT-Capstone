@@ -28,10 +28,15 @@ namespace Spline
         }
         
         public void SetPosition(float in_time) {
+
+            // Calulate the target positon
             Vector3 targetPos = StaticFunctions.GetSplinePosition(currentWaypoint.transform.position, nextWaypoint.transform.position, currentWaypoint.control.position, StaticFunctions.GetReflection(nextWaypoint.transform.position, nextWaypoint.control.position), pathPercent);
+            
+            //  Calculate the distance between the target position and the current position
             float moveDistance = Vector3.Distance(ownerTR.position, targetPos);
             velocity = (targetPos - ownerTR.position).normalized * (moveDistance / Time.deltaTime);
 
+            // Set the mover's position, rotation, and velocity
             ownerTR.position = targetPos;
             ownerTR.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
             ownerRB.velocity = Vector3.zero;
@@ -39,10 +44,15 @@ namespace Spline
         }
 
         public void SetPosition(float in_time, Vector3 in_startPos, Vector3 in_startControl, Vector3 in_endPos, Vector3 in_endControl, bool in_lerpRotation = false) {
+            
+            // Calulate the target positon
             Vector3 targetPos = StaticFunctions.GetSplinePosition(in_startPos, in_endPos, in_startControl, in_endControl, pathPercent);
+            
+            //  Calculate the distance between the target position and the current position
             float moveDistance = Vector3.Distance(ownerTR.position, targetPos);
             velocity = (targetPos - ownerTR.position).normalized * (moveDistance / Time.deltaTime);
 
+            // Set the mover's position, rotation, and velocity
             ownerTR.position = targetPos;
             if (in_lerpRotation) ownerTR.rotation = Quaternion.Lerp(startingRotation, Quaternion.LookRotation(velocity.normalized, Vector3.up), pathPercent);
             else ownerTR.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
